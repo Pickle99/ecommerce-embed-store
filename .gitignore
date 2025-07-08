@@ -1,0 +1,36 @@
+# Node modules for all packages (if using node_modules instead of Yarn PnP)
+node_modules/
+.pnp.cjs
+.pnp.loader.mjs
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.yarn/patches/
+.yarn/releases/
+.yarn/plugins/
+.yarn/sdks/
+.yarn/versions/
+
+# Dist/output folders for backend
+apps/backend-fastify/dist/
+apps/backend-fastify/node_modules/
+
+# Dist/output folders for frontend (Vite build)
+apps/frontend-vue/dist/
+apps/frontend-vue/node_modules/
+
+# Logs
+*.log
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files (you might want to keep .env locally)
+*.env
+*.local
+
+# VSCode settings (optional)
+.vscode/
+
+# Optional Mac OS files
+.DS_Store
