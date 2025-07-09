@@ -1,49 +1,34 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { useFetch } from '@vueuse/core'
+import { computed } from 'vue'
+import RecentProduct from './components/RecentProduct.vue'
 
-declare global {
-  interface Window {
-    xProductBrowser?: (...args: string[]) => void
-    Ecwid: any
-  }
-}
+const { data, error, isFetching } = useFetch(
+  'http://localhost:8000/recently-updated-products'
+).json()
 
-onMounted(() => {
-  window.Ecwid?.OnPageLoaded?.add(function (page: any) {
-    if (page.type === 'CART') {
-      console.log('Cart page detected!')
+const products = computed(() => data.value?.products ?? [])
 
-      const wrapper = document.getElementById('my-store-109761389')
-      if (!wrapper) {
-        console.log('Store root not found')
-        return
-      }
-
-      const footer = wrapper.querySelector('.ec-footer')
-      if (!footer || !footer.parentElement) {
-        console.log('Footer not found or has no parent')
-        return
-      }
-
-      if (document.getElementById('custom-message')) {
-        console.log('Message already inserted')
-        return
-      }
-
-      const messageDiv = document.createElement('div')
-      messageDiv.id = 'custom-message'
-      messageDiv.style.backgroundColor = 'gray'
-      messageDiv.style.padding = '0.5rem'
-
-      const messageP = document.createElement('p')
-      messageP.textContent = 'Hey! it is me'
-      messageP.style.color = 'black'
-      messageP.style.margin = '12px'
-
-      messageDiv.appendChild(messageP)
-
-      footer.parentElement.insertBefore(messageDiv, footer)
-    }
-  })
-})
+console.log(products)
 </script>
+
+<template>
+  <div v-if="isFetching">Loading...</div>
+  <div v-else-if="error">{{ error.message }}</div>
+  <div v-else-if="products.length === 0">No products found.</div>
+  <div v-else class="catalog">
+    <div class="advised_products">
+      <h2 style="text-align: center">Recently Updated Products</h2>
+      <div
+        class="list_products"
+        :style="{
+          display: 'flex',
+          'flex-wrap': 'wrap',
+          gap: '1.5rem',
+        }"
+      >
+        <RecentProduct v-for="item in products" :key="item.id" :product="item" />
+      </div>
+    </div>
+  </div>
+</template>
