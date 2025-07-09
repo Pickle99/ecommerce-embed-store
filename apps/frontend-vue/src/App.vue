@@ -21,8 +21,9 @@ const products = computed(() => data.value?.products ?? [])
         class="list_products"
         :style="{
           display: 'flex',
-          'flex-wrap': 'wrap',
-          gap: '1.5rem',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '1rem',
         }"
       >
         <RecentProduct v-for="item in products" :key="item.id" :product="item" />
