@@ -8,8 +8,6 @@ const { data, error, isFetching } = useFetch(
 ).json()
 
 const products = computed(() => data.value?.products ?? [])
-
-console.log(products, 'products')
 </script>
 
 <template>
@@ -31,5 +29,4 @@ console.log(products, 'products')
       </div>
     </div>
   </div>
-  <div>i dont see anything</div>
 </template>
