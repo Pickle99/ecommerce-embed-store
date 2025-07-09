@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useFetch } from '@vueuse/core'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import RecentProduct from './components/RecentProduct.vue'
 
 const { data, error, isFetching } = useFetch(
@@ -9,7 +9,7 @@ const { data, error, isFetching } = useFetch(
 
 const products = computed(() => data.value?.products ?? [])
 
-console.log(products)
+console.log(products, 'products')
 </script>
 
 <template>
@@ -31,4 +31,5 @@ console.log(products)
       </div>
     </div>
   </div>
+  <div>i dont see anything</div>
 </template>

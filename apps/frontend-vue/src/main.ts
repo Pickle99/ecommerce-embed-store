@@ -2,25 +2,14 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 //@ts-ignore
-Ecwid.OnPageLoaded.add(function (page: any) {
+Ecwid.OnPageLoaded.add((page: any) => {
   if (page.type === 'CART') {
     const cartWrapper = document.querySelector('.ec-store__content-wrapper') as HTMLElement
-    if (cartWrapper) {
-      cartWrapper.style.display = 'flex'
-      cartWrapper.style.flexDirection = 'column'
-      console.log('parent found')
-    } else {
-      console.log('parent not found')
-    }
+    if (!cartWrapper) return
 
     const widgetContainer = document.createElement('div')
-    widgetContainer.style.order = '2'
-
-    const ecwidFooter = document.querySelector('.ec-footer') as HTMLElement
-    if (ecwidFooter) ecwidFooter.style.order = '3'
-
     widgetContainer.setAttribute('class', 'widget')
-    cartWrapper?.appendChild(widgetContainer)
+    cartWrapper.appendChild(widgetContainer)
 
     const shadow = widgetContainer.attachShadow({ mode: 'open' })
 
@@ -37,7 +26,7 @@ Ecwid.OnPageLoaded.add(function (page: any) {
     shadow.appendChild(stylesheet)
     shadow.appendChild(vueRoot)
 
-    const vueApp = createApp(App)
-    vueApp.mount(vueRoot)
+    const app = createApp(App)
+    app.mount(vueRoot)
   }
 })
