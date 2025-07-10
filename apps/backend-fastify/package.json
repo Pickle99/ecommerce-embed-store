@@ -22,6 +22,7 @@
     "dev": "tsx watch src/main.ts",
     "build": "tsc",
     "start": "node dist/main.js",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "generate-settings": "tsx scripts/generate-settings.ts"
   }
 }

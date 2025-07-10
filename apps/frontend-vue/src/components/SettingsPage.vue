@@ -1,4 +1,10 @@
 <template>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://d35z3p2poghz10.cloudfront.net/ecwid-sdk/css/1.3.18/ecwid-app-ui.css"
+    />
+  </head>
   <div class="settings-page cf" style="padding: 1.5rem">
     <div class="settings-page__header">
       <div class="settings-page__titles settings-page__titles--left">
