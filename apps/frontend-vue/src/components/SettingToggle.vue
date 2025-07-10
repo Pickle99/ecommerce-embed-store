@@ -5,7 +5,6 @@
         <div class="iconable-block__infographics">
           <span class="iconable-block__icon">
             <EyeIcon v-if="actionButton === 'toggle'" />
-            <!-- fallback (optional) -->
             <NumberedListIcon v-if="actionButton === 'dropdown'" />
           </span>
         </div>

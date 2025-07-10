@@ -13,10 +13,10 @@ const products = computed(() => data.value?.products ?? [])
 <template>
   <div v-if="isFetching">Loading...</div>
   <div v-else-if="error">{{ error.message }}</div>
-  <div v-else-if="products.length === 0">No products found.</div>
   <div v-else class="catalog">
     <div class="advised_products">
       <h2 style="text-align: center">Recently Updated Products</h2>
+      <div v-if="products.length === 0">No products found.</div>
       <div
         class="list_products"
         :style="{
