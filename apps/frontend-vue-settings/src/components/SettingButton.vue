@@ -19,7 +19,7 @@
                 <p>{{ description }}</p>
               </div>
             </div>
-            <div class="status-block__actions-dropdown">
+            <div v-if="actionButton === 'dropdown'" class="status-block__actions-dropdown">
               <div class="btn-group dropdown-toggle">
                 <button
                   type="button"
@@ -28,7 +28,7 @@
                   style="display: none"
                 ></button>
 
-                <div v-if="actionButton === 'dropdown'">
+                <div>
                   <div
                     class="btn btn-default btn-dropdown btn-medium list-dropdown-no-general-text"
                   >
@@ -43,20 +43,20 @@
                     </ul>
                   </div>
                 </div>
-                <div v-else-if="actionButton === 'toggle'" class="status-block__primary-action">
-                  <label class="checkbox big">
-                    <input
-                      name=""
-                      type="checkbox"
-                      :checked="settingsData.recently_updated_products_visibility"
-                      @change="onToggleChange"
-                    />
-                    <div>
-                      <div></div>
-                    </div>
-                  </label>
-                </div>
               </div>
+            </div>
+            <div v-else-if="actionButton === 'toggle'" class="status-block__primary-action">
+              <label class="checkbox big">
+                <input
+                  name="toggler"
+                  type="checkbox"
+                  :checked="settingsData.recently_updated_products_visibility"
+                  @change="onToggleChange"
+                />
+                <div>
+                  <div></div>
+                </div>
+              </label>
             </div>
           </div>
         </div>

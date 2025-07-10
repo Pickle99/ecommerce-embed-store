@@ -1,6 +1,9 @@
 <template>
   <div class="settings-page cf" style="padding: 1.5rem">
-    <div @click="handleRedirectToStore" style="display: flex; align-items: center; gap: 0.7rem">
+    <div
+      @click="handleRedirectToStore"
+      style="display: flex; align-items: center; gap: 0.7rem; cursor: pointer; width: fit-content"
+    >
       <div>
         <LongArrowLeftIcon />
       </div>
@@ -55,25 +58,24 @@
             </div>
           </div>
         </div>
-
-        <SettingButton
-          title="RUP widget"
-          description="Enable/Disable recently updated products widget visibility"
-          actionButton="toggle"
-          :settingsData="settings"
-          @toggle="updateWidgetVisibility"
-        />
-
-        <SettingButton
-          title="Products visibility on RUP widget by default"
-          description="Set how many Products are visible on RUP widget by default"
-          actionButton="dropdown"
-          :settingsData="settings"
-        />
-
-        <ProductTableList />
+        <div class="named-area__body">
+          <SettingButton
+            title="RUP widget"
+            description="Enable/Disable recently updated products widget visibility"
+            actionButton="toggle"
+            :settingsData="settings"
+            @toggle="updateWidgetVisibility"
+          />
+          <SettingButton
+            title="Products visibility on RUP widget by default"
+            description="Set how many Products are visible on RUP widget by default"
+            actionButton="dropdown"
+            :settingsData="settings"
+          />
+        </div>
       </div>
     </div>
+    <ProductTableList />
   </div>
 </template>
 
