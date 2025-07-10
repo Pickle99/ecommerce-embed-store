@@ -1,6 +1,6 @@
 <template>
   <div class="settings-page cf" style="padding: 1.5rem">
-    <div style="display: flex; align-items: center; gap: 0.7rem">
+    <div @click="handleRedirectToStore" style="display: flex; align-items: center; gap: 0.7rem">
       <div>
         <LongArrowLeftIcon />
       </div>
@@ -84,6 +84,10 @@ import SettingButton from './SettingButton.vue'
 import ProductTableList from './ProductTableList.vue'
 import LongArrowLeftIcon from '../icons/LongArrowLeftIcon.vue'
 
+function handleRedirectToStore() {
+  window.location.href = 'http://localhost:8000'
+}
+
 const { data, error, isFetching } = useFetch('http://localhost:8000/rup-settings').json()
 
 const settings = computed(() => data.value?.settings ?? [])
@@ -111,7 +115,3 @@ async function updateWidgetVisibility(newValue: boolean) {
   }
 }
 </script>
-
-<style>
-@import url('https://d35z3p2poghz10.cloudfront.net/ecwid-sdk/css/1.3.18/ecwid-app-ui.css');
-</style>

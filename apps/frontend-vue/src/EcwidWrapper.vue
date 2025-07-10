@@ -1,8 +1,4 @@
-<template>
-  <!-- <div id="ecwid-container">
-    <div id="my-store-101560752"></div>
-  </div> -->
-</template>
+<template></template>
 
 <script setup lang="ts">
 import { onMounted, nextTick } from 'vue'

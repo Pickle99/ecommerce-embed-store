@@ -67,7 +67,6 @@
 
 <script setup lang="ts">
 import { RupSettings } from '../types/index'
-import { defineEmits } from 'vue'
 import LockIcon from '../icons/LockIcon.vue'
 import DropdownListIcon from '../icons/DropdownListIcon.vue'
 
