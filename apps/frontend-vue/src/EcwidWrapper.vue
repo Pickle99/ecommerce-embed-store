@@ -1,20 +1,21 @@
 <template>
-  <div id="ecwid-container">
+  <!-- <div id="ecwid-container">
     <div id="my-store-101560752"></div>
-  </div>
+  </div> -->
 </template>
 
 <script setup lang="ts">
 import { onMounted, nextTick } from 'vue'
 import { createApp } from 'vue'
 import RecentProducts from './components/RecentProducts.vue'
+import { useInterfaceStore } from './store/useInterfaceStore'
+
+const interfaceStore = useInterfaceStore()
 
 function initCartEnhancements() {
   // @ts-ignore
   Ecwid.OnPageLoaded.add(function (page: any) {
     if (page.type === 'CART') {
-      console.log('cart page')
-
       const cartWrapper = document.querySelector('.ec-store__content-wrapper') as HTMLElement
       if (!cartWrapper) return
 
@@ -66,7 +67,7 @@ function initCartEnhancements() {
         const newA = document.createElement('a')
         newA.className =
           'ec-footer__link ec-link ec-link--muted link--icon-top footer__link--shopping-cart'
-        newA.href = '#/settings'
+        newA.href = 'http://localhost:3000/settings'
 
         const newSpan = document.createElement('span')
         newSpan.className = 'svg-icon'

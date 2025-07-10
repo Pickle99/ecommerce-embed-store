@@ -1,6 +1,6 @@
 <template>
   <div class="settings-page cf" style="padding: 1.5rem">
-    <div @click="goBackToStore" style="display: flex; align-items: center; gap: 0.7rem">
+    <div style="display: flex; align-items: center; gap: 0.7rem">
       <div>
         <LongArrowLeftIcon />
       </div>
@@ -83,17 +83,10 @@ import { computed, ref, onMounted, onUnmounted } from 'vue'
 import SettingToggle from './SettingToggle.vue'
 import ProductTableList from './ProductTableList.vue'
 import LongArrowLeftIcon from './icons/LongArrowLeftIcon.vue'
-import { useRouter } from 'vue-router'
 
 const { data, error, isFetching } = useFetch('http://localhost:8000/rup-settings').json()
 
 const settings = computed(() => data.value?.settings ?? [])
-
-const router = useRouter()
-
-function goBackToStore() {
-  router.push('/')
-}
 
 async function updateWidgetVisibility(newValue: boolean) {
   try {
