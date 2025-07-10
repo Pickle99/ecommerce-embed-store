@@ -2,8 +2,13 @@
   <div class="settings-page cf" style="padding: 1.5rem">
     <div class="settings-page__header">
       <div class="settings-page__titles settings-page__titles--left">
-        <h1 class="settings-page__title">Your feature and its purpose</h1>
-        <div class="settings-page__subtitle">Short description (optional)</div>
+        <h1 class="settings-page__title">Store onwer Settings page</h1>
+        <div class="settings-page__subtitle">
+          You can see how many people interacted with recently updated products, how many recently
+          updated products are visible by default for customers, export the products to CSV/XSLX, or
+          enable/disable the widget. P.S: this page is built for store owner, however right now it
+          does not have any auth or guard.
+        </div>
       </div>
 
       <div class="alert alert-success alert-icon">
@@ -26,230 +31,6 @@
               Use the alert messages to catch users’ attention. If you want to let your users know
               about a problem or successful operation in your app, use the alerts.
               <a onclick="postOpenPage('#components.alerts')">See Alerts</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="named-area">
-        <div class="named-area__header">
-          <div class="named-area__titles">
-            <div class="named-area__title">Instagram account</div>
-            <div class="named-area__subtitle">
-              To sell on Instagram, connect your Instagram account.
-            </div>
-          </div>
-        </div>
-        <div class="named-area__body">
-          <div class="a-card-stack">
-            <div class="a-card a-card--normal">
-              <div class="a-card__paddings">
-                <div class="feature-element has-icon">
-                  <div class="feature-element__core">
-                    <div class="feature-element__data">
-                      <div class="feature-element__title">Set up your Instagram account</div>
-                      <div class="feature-element__content">
-                        <div class="feature-element__text">
-                          <div class="titled-item">
-                            <div class="titled-item__title"></div>
-                            <div class="titled-item__content">
-                              <div>
-                                To create a storefront on Instagram, first check if your business
-                                sells physical goods and is located in
-                                <a
-                                  href="https://help.instagram.com/321000045119159?ref=fbb_ig_shopping_setup"
-                                  target="_blank"
-                                  >supported markets</a
-                                >. Make sure it complies with
-                                <a
-                                  href="https://www.facebook.com/policies/commerce?ref=fbb_ig_shopping_setup"
-                                  target="_blank"
-                                  >Facebook/Instagram Commerce Policies</a
-                                >
-                                and follow our step-by-step instructions to gain approval from
-                                Instagram.
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="feature-element__icon">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="132"
-                        height="132"
-                        viewBox="0 0 132 132"
-                      >
-                        <defs>
-                          <radialGradient
-                            id="c"
-                            cx="158.429"
-                            cy="578.088"
-                            r="65"
-                            gradientUnits="userSpaceOnUse"
-                            gradientTransform="matrix(0 -1.98198 1.8439 0 -1031.402 454.004)"
-                            fx="158.429"
-                            fy="578.088"
-                          >
-                            <stop offset="0" stop-color="#fd5"></stop>
-                            <stop offset=".1" stop-color="#fd5"></stop>
-                            <stop offset=".5" stop-color="#ff543e"></stop>
-                            <stop offset="1" stop-color="#c837ab"></stop>
-                          </radialGradient>
-                          <radialGradient
-                            id="d"
-                            cx="147.694"
-                            cy="473.455"
-                            r="65"
-                            gradientUnits="userSpaceOnUse"
-                            gradientTransform="matrix(.17394 .86872 -3.5818 .71718 1648.348 -458.493)"
-                            fx="147.694"
-                            fy="473.455"
-                          >
-                            <stop offset="0" stop-color="#3771c8"></stop>
-                            <stop stop-color="#3771c8" offset=".128"></stop>
-                            <stop offset="1" stop-color="#60f" stop-opacity="0"></stop>
-                          </radialGradient>
-                        </defs>
-                        <path
-                          fill="url(#c)"
-                          d="M65.03 0C37.888 0 29.95.028 28.407.156c-5.57.463-9.036 1.34-12.812 3.22-2.91 1.445-5.205 3.12-7.47 5.468C4 13.126 1.5 18.394.595 24.656c-.44 3.04-.568 3.66-.594 19.188-.01 5.176 0 11.988 0 21.125 0 27.12.03 35.05.16 36.59.45 5.42 1.3 8.83 3.1 12.56 3.44 7.14 10.01 12.5 17.75 14.5 2.68.69 5.64 1.07 9.44 1.25 1.61.07 18.02.12 34.44.12 16.42 0 32.84-.02 34.41-.1 4.4-.207 6.955-.55 9.78-1.28 7.79-2.01 14.24-7.29 17.75-14.53 1.765-3.64 2.66-7.18 3.065-12.317.088-1.12.125-18.977.125-36.81 0-17.836-.04-35.66-.128-36.78-.41-5.22-1.305-8.73-3.127-12.44-1.495-3.037-3.155-5.305-5.565-7.624C116.9 4 111.64 1.5 105.372.596 102.335.157 101.73.027 86.19 0H65.03z"
-                          transform="translate(1.004 1)"
-                        ></path>
-                        <path
-                          fill="url(#d)"
-                          d="M65.03 0C37.888 0 29.95.028 28.407.156c-5.57.463-9.036 1.34-12.812 3.22-2.91 1.445-5.205 3.12-7.47 5.468C4 13.126 1.5 18.394.595 24.656c-.44 3.04-.568 3.66-.594 19.188-.01 5.176 0 11.988 0 21.125 0 27.12.03 35.05.16 36.59.45 5.42 1.3 8.83 3.1 12.56 3.44 7.14 10.01 12.5 17.75 14.5 2.68.69 5.64 1.07 9.44 1.25 1.61.07 18.02.12 34.44.12 16.42 0 32.84-.02 34.41-.1 4.4-.207 6.955-.55 9.78-1.28 7.79-2.01 14.24-7.29 17.75-14.53 1.765-3.64 2.66-7.18 3.065-12.317.088-1.12.125-18.977.125-36.81 0-17.836-.04-35.66-.128-36.78-.41-5.22-1.305-8.73-3.127-12.44-1.495-3.037-3.155-5.305-5.565-7.624C116.9 4 111.64 1.5 105.372.596 102.335.157 101.73.027 86.19 0H65.03z"
-                          transform="translate(1.004 1)"
-                        ></path>
-                        <path
-                          fill="#fff"
-                          d="M66.004 18c-13.036 0-14.672.057-19.792.29-5.11.234-8.598 1.043-11.65 2.23-3.157 1.226-5.835 2.866-8.503 5.535-2.67 2.668-4.31 5.346-5.54 8.502-1.19 3.053-2 6.542-2.23 11.65C18.06 51.327 18 52.964 18 66s.058 14.667.29 19.787c.235 5.11 1.044 8.598 2.23 11.65 1.227 3.157 2.867 5.835 5.536 8.503 2.667 2.67 5.345 4.314 8.5 5.54 3.054 1.187 6.543 1.996 11.652 2.23 5.12.233 6.755.29 19.79.29 13.037 0 14.668-.057 19.788-.29 5.11-.234 8.602-1.043 11.656-2.23 3.156-1.226 5.83-2.87 8.497-5.54 2.67-2.668 4.31-5.346 5.54-8.502 1.18-3.053 1.99-6.542 2.23-11.65.23-5.12.29-6.752.29-19.788 0-13.036-.06-14.672-.29-19.792-.24-5.11-1.05-8.598-2.23-11.65-1.23-3.157-2.87-5.835-5.54-8.503-2.67-2.67-5.34-4.31-8.5-5.535-3.06-1.187-6.55-1.996-11.66-2.23-5.12-.233-6.75-.29-19.79-.29zm-4.306 8.65c1.278-.002 2.704 0 4.306 0 12.816 0 14.335.046 19.396.276 4.68.214 7.22.996 8.912 1.653 2.24.87 3.837 1.91 5.516 3.59 1.68 1.68 2.72 3.28 3.592 5.52.657 1.69 1.44 4.23 1.653 8.91.23 5.06.28 6.58.28 19.39s-.05 14.33-.28 19.39c-.214 4.68-.996 7.22-1.653 8.91-.87 2.24-1.912 3.835-3.592 5.514-1.68 1.68-3.275 2.72-5.516 3.59-1.69.66-4.232 1.44-8.912 1.654-5.06.23-6.58.28-19.396.28-12.817 0-14.336-.05-19.396-.28-4.68-.216-7.22-.998-8.913-1.655-2.24-.87-3.84-1.91-5.52-3.59-1.68-1.68-2.72-3.276-3.592-5.517-.657-1.69-1.44-4.23-1.653-8.91-.23-5.06-.276-6.58-.276-19.398s.046-14.33.276-19.39c.214-4.68.996-7.22 1.653-8.912.87-2.24 1.912-3.84 3.592-5.52 1.68-1.68 3.28-2.72 5.52-3.592 1.692-.66 4.233-1.44 8.913-1.655 4.428-.2 6.144-.26 15.09-.27zm29.928 7.97c-3.18 0-5.76 2.577-5.76 5.758 0 3.18 2.58 5.76 5.76 5.76 3.18 0 5.76-2.58 5.76-5.76 0-3.18-2.58-5.76-5.76-5.76zm-25.622 6.73c-13.613 0-24.65 11.037-24.65 24.65 0 13.613 11.037 24.645 24.65 24.645C79.617 90.645 90.65 79.613 90.65 66S79.616 41.35 66.003 41.35zm0 8.65c8.836 0 16 7.163 16 16 0 8.836-7.164 16-16 16-8.837 0-16-7.164-16-16 0-8.837 7.163-16 16-16z"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="a-card a-card--compact a-card--has-hover">
-              <div class="a-card__paddings">
-                <div class="iconable-block iconable-block--info iconable-block--hide-in-mobile">
-                  <div class="iconable-block__infographics">
-                    <span class="iconable-block__icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56">
-                        <path
-                          d="M56 28a28 28 0 10-32.38 27.66V36.09h-7.1V28h7.1v-6.17c0-7 4.19-10.89 10.58-10.89a43.71 43.71 0 016.27.54v6.9h-3.53c-3.48 0-4.56 2.15-4.56 4.37V28h7.76l-1.24 8.09h-6.52v19.57A28 28 0 0056 28z"
-                          fill="#1877f2"
-                        ></path>
-                        <path
-                          d="M38.9 36.09L40.14 28h-7.76v-5.25c0-2.22 1.08-4.37 4.56-4.37h3.53v-6.9a43.71 43.71 0 00-6.27-.54c-6.39 0-10.58 3.87-10.58 10.89V28h-7.1v8.09h7.1v19.57a28.38 28.38 0 008.76 0V36.09z"
-                          fill="#fff"
-                        ></path>
-                      </svg>
-                    </span>
-                  </div>
-                  <div class="iconable-block__content">
-                    <div class="cta-block">
-                      <div class="cta-block__central">
-                        <div class="cta-block__title">Step 1. Connect your Facebook page</div>
-                        <div class="cta-block__content">
-                          <div>
-                            Connect your Facebook page to upload your product catalog to your
-                            Facebook shop. Instagram will use your Facebook shop catalog to tag
-                            products.
-                          </div>
-                        </div>
-                      </div>
-                      <div class="cta-block__cta">
-                        <a class="btn btn-medium btn-primary" href="#fb-shops" target=""
-                          >Connect Facebook</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="a-card a-card--compact a-card--has-hover">
-              <div class="a-card__paddings">
-                <div
-                  class="iconable-block iconable-block--info iconable-block--disabled iconable-block--hide-in-mobile"
-                >
-                  <div class="iconable-block__infographics">
-                    <span class="iconable-block__icon">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="132"
-                        height="132"
-                        viewBox="0 0 132 132"
-                      >
-                        <defs>
-                          <radialGradient
-                            id="c"
-                            cx="158.429"
-                            cy="578.088"
-                            r="65"
-                            gradientUnits="userSpaceOnUse"
-                            gradientTransform="matrix(0 -1.98198 1.8439 0 -1031.402 454.004)"
-                            fx="158.429"
-                            fy="578.088"
-                          >
-                            <stop offset="0" stop-color="#fd5"></stop>
-                            <stop offset=".1" stop-color="#fd5"></stop>
-                            <stop offset=".5" stop-color="#ff543e"></stop>
-                            <stop offset="1" stop-color="#c837ab"></stop>
-                          </radialGradient>
-                          <radialGradient
-                            id="d"
-                            cx="147.694"
-                            cy="473.455"
-                            r="65"
-                            gradientUnits="userSpaceOnUse"
-                            gradientTransform="matrix(.17394 .86872 -3.5818 .71718 1648.348 -458.493)"
-                            fx="147.694"
-                            fy="473.455"
-                          >
-                            <stop offset="0" stop-color="#3771c8"></stop>
-                            <stop stop-color="#3771c8" offset=".128"></stop>
-                            <stop offset="1" stop-color="#60f" stop-opacity="0"></stop>
-                          </radialGradient>
-                        </defs>
-                        <path
-                          fill="url(#c)"
-                          d="M65.03 0C37.888 0 29.95.028 28.407.156c-5.57.463-9.036 1.34-12.812 3.22-2.91 1.445-5.205 3.12-7.47 5.468C4 13.126 1.5 18.394.595 24.656c-.44 3.04-.568 3.66-.594 19.188-.01 5.176 0 11.988 0 21.125 0 27.12.03 35.05.16 36.59.45 5.42 1.3 8.83 3.1 12.56 3.44 7.14 10.01 12.5 17.75 14.5 2.68.69 5.64 1.07 9.44 1.25 1.61.07 18.02.12 34.44.12 16.42 0 32.84-.02 34.41-.1 4.4-.207 6.955-.55 9.78-1.28 7.79-2.01 14.24-7.29 17.75-14.53 1.765-3.64 2.66-7.18 3.065-12.317.088-1.12.125-18.977.125-36.81 0-17.836-.04-35.66-.128-36.78-.41-5.22-1.305-8.73-3.127-12.44-1.495-3.037-3.155-5.305-5.565-7.624C116.9 4 111.64 1.5 105.372.596 102.335.157 101.73.027 86.19 0H65.03z"
-                          transform="translate(1.004 1)"
-                        ></path>
-                        <path
-                          fill="url(#d)"
-                          d="M65.03 0C37.888 0 29.95.028 28.407.156c-5.57.463-9.036 1.34-12.812 3.22-2.91 1.445-5.205 3.12-7.47 5.468C4 13.126 1.5 18.394.595 24.656c-.44 3.04-.568 3.66-.594 19.188-.01 5.176 0 11.988 0 21.125 0 27.12.03 35.05.16 36.59.45 5.42 1.3 8.83 3.1 12.56 3.44 7.14 10.01 12.5 17.75 14.5 2.68.69 5.64 1.07 9.44 1.25 1.61.07 18.02.12 34.44.12 16.42 0 32.84-.02 34.41-.1 4.4-.207 6.955-.55 9.78-1.28 7.79-2.01 14.24-7.29 17.75-14.53 1.765-3.64 2.66-7.18 3.065-12.317.088-1.12.125-18.977.125-36.81 0-17.836-.04-35.66-.128-36.78-.41-5.22-1.305-8.73-3.127-12.44-1.495-3.037-3.155-5.305-5.565-7.624C116.9 4 111.64 1.5 105.372.596 102.335.157 101.73.027 86.19 0H65.03z"
-                          transform="translate(1.004 1)"
-                        ></path>
-                        <path
-                          fill="#fff"
-                          d="M66.004 18c-13.036 0-14.672.057-19.792.29-5.11.234-8.598 1.043-11.65 2.23-3.157 1.226-5.835 2.866-8.503 5.535-2.67 2.668-4.31 5.346-5.54 8.502-1.19 3.053-2 6.542-2.23 11.65C18.06 51.327 18 52.964 18 66s.058 14.667.29 19.787c.235 5.11 1.044 8.598 2.23 11.65 1.227 3.157 2.867 5.835 5.536 8.503 2.667 2.67 5.345 4.314 8.5 5.54 3.054 1.187 6.543 1.996 11.652 2.23 5.12.233 6.755.29 19.79.29 13.037 0 14.668-.057 19.788-.29 5.11-.234 8.602-1.043 11.656-2.23 3.156-1.226 5.83-2.87 8.497-5.54 2.67-2.668 4.31-5.346 5.54-8.502 1.18-3.053 1.99-6.542 2.23-11.65.23-5.12.29-6.752.29-19.788 0-13.036-.06-14.672-.29-19.792-.24-5.11-1.05-8.598-2.23-11.65-1.23-3.157-2.87-5.835-5.54-8.503-2.67-2.67-5.34-4.31-8.5-5.535-3.06-1.187-6.55-1.996-11.66-2.23-5.12-.233-6.75-.29-19.79-.29zm-4.306 8.65c1.278-.002 2.704 0 4.306 0 12.816 0 14.335.046 19.396.276 4.68.214 7.22.996 8.912 1.653 2.24.87 3.837 1.91 5.516 3.59 1.68 1.68 2.72 3.28 3.592 5.52.657 1.69 1.44 4.23 1.653 8.91.23 5.06.28 6.58.28 19.39s-.05 14.33-.28 19.39c-.214 4.68-.996 7.22-1.653 8.91-.87 2.24-1.912 3.835-3.592 5.514-1.68 1.68-3.275 2.72-5.516 3.59-1.69.66-4.232 1.44-8.912 1.654-5.06.23-6.58.28-19.396.28-12.817 0-14.336-.05-19.396-.28-4.68-.216-7.22-.998-8.913-1.655-2.24-.87-3.84-1.91-5.52-3.59-1.68-1.68-2.72-3.276-3.592-5.517-.657-1.69-1.44-4.23-1.653-8.91-.23-5.06-.276-6.58-.276-19.398s.046-14.33.276-19.39c.214-4.68.996-7.22 1.653-8.912.87-2.24 1.912-3.84 3.592-5.52 1.68-1.68 3.28-2.72 5.52-3.592 1.692-.66 4.233-1.44 8.913-1.655 4.428-.2 6.144-.26 15.09-.27zm29.928 7.97c-3.18 0-5.76 2.577-5.76 5.758 0 3.18 2.58 5.76 5.76 5.76 3.18 0 5.76-2.58 5.76-5.76 0-3.18-2.58-5.76-5.76-5.76zm-25.622 6.73c-13.613 0-24.65 11.037-24.65 24.65 0 13.613 11.037 24.645 24.65 24.645C79.617 90.645 90.65 79.613 90.65 66S79.616 41.35 66.003 41.35zm0 8.65c8.836 0 16 7.163 16 16 0 8.836-7.164 16-16 16-8.837 0-16-7.164-16-16 0-8.837 7.163-16 16-16z"
-                        ></path>
-                      </svg>
-                    </span>
-                  </div>
-                  <div class="iconable-block__content">
-                    <div class="cta-block">
-                      <div class="cta-block__central">
-                        <div class="cta-block__title">Step 2. Connect your Instagram profile</div>
-                        <div class="cta-block__content">
-                          <div>
-                            Select “Connect Instagram” and follow the on-screen instructions to
-                            connect your Instagram account with your Facebook page. If your
-                            Instagram account isn’t a business one yet, you’ll be asked to convert
-                            it into one.
-                          </div>
-                        </div>
-                      </div>
-                      <div class="cta-block__cta"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -297,11 +78,11 @@
                   <div class="status-block">
                     <div class="status-block__central">
                       <div class="status-block__header">
-                        <span class="status-block__title">Cash on delivery</span>
+                        <span class="status-block__title">RUP widget</span>
                         <span class="status-block__edit">Edit</span>
                       </div>
                       <div class="status-block__content">
-                        <p>Set payment method description at customer checkout</p>
+                        <p>Enable/Disable recently updated products widget visibility</p>
                       </div>
                     </div>
                     <div class="status-block__actions-dropdown">
@@ -312,20 +93,6 @@
                           aria-hidden="true"
                           style="display: none"
                         ></button>
-                        <div
-                          class="btn btn-default btn-dropdown btn-medium list-dropdown-no-general-text"
-                        >
-                          <span class="btn-dropdown-container"
-                            ><span class="actions">Actions</span></span
-                          ><span class="icon-arr-down"></span>
-                        </div>
-                        <div class="list-dropdown list-dropdown-medium">
-                          <ul>
-                            <li><a>Rename</a></li>
-                            <li><a>Sort</a></li>
-                            <li><a>Delete</a></li>
-                          </ul>
-                        </div>
                       </div>
                     </div>
                     <div class="status-block__primary-action">
@@ -371,11 +138,13 @@
                   <div class="status-block">
                     <div class="status-block__central">
                       <div class="status-block__header">
-                        <span class="status-block__title">Some other setting</span>
+                        <span class="status-block__title"
+                          >Products visibility on RUP widget by default</span
+                        >
                         <span class="status-block__edit">Edit</span>
                       </div>
                       <div class="status-block__content">
-                        <p>Some description</p>
+                        <p>Set how many Products are visible on RUP widget by default</p>
                       </div>
                     </div>
                     <div class="status-block__actions-dropdown">
@@ -390,7 +159,7 @@
                           class="btn btn-default btn-dropdown btn-medium list-dropdown-no-general-text"
                         >
                           <span class="btn-dropdown-container"
-                            ><span class="actions">Actions</span></span
+                            ><span class="actions">Select</span></span
                           ><span class="icon-arr-down"></span>
                         </div>
                         <div class="list-dropdown list-dropdown-medium">
@@ -401,14 +170,6 @@
                           </ul>
                         </div>
                       </div>
-                    </div>
-                    <div class="status-block__primary-action">
-                      <label class="checkbox big">
-                        <input name="" type="checkbox" checked="" />
-                        <div>
-                          <div></div>
-                        </div>
-                      </label>
                     </div>
                   </div>
                 </div>
@@ -515,159 +276,6 @@
             </div>
           </div>
           <!-- end of CTACard component -->
-        </div>
-      </div>
-      <div class="named-area">
-        <div class="named-area__header">
-          <div class="named-area__titles">
-            <div class="named-area__title">Settings Blocks</div>
-            <div class="named-area__subtitle">
-              Here you can place all the feature settings or add extra information about how your
-              feature works.
-              <a onclick="postOpenPage('#page-template.forms')">See Settings Forms</a>
-            </div>
-          </div>
-          <div class="named-area__description"></div>
-          <div class="named-area__additional"></div>
-        </div>
-        <div class="named-area__body">
-          <div class="a-card a-card--normal">
-            <div class="a-card__paddings">
-              <ul class="titled-items-list titled-items-list--ordered">
-                <li class="titled-items-list__item titled-item">
-                  <div class="titled-item__title">Feature Card</div>
-                  <div class="titled-item__content">Like in example above</div>
-                </li>
-                <li class="titled-items-list__item titled-item">
-                  <div class="titled-item__title">A-card with "Titled Items List"</div>
-                  <div class="titled-item__content">Like this card</div>
-                </li>
-                <li class="titled-item titled-items-list__item">
-                  <div class="titled-item__title">A-card with form</div>
-                  <div class="titled-item__content">Like in example below</div>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="a-card a-card--normal">
-            <div class="a-card__paddings">
-              <div class="form-area">
-                <div class="form-area__content">
-                  <div class="fieldsets-batch">
-                    <div class="fieldset">
-                      <div class="fieldset__title">Field can have a title...</div>
-                      <div class="field field--medium">
-                        <span class="fieldset__svg-icon"></span>
-                        <label class="field__label">Instruction Title</label>
-                        <input type="text" class="field__input" tabindex="4" maxlength="64" />
-                        <div class="field__placeholder">Instruction Title</div>
-                        <span class="field-state--success">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="26px"
-                            height="26px"
-                            viewBox="0 0 26 26"
-                            focusable="false"
-                          >
-                            <path
-                              d="M5 12l5.02 4.9L21.15 4c.65-.66 1.71-.66 2.36 0 .65.67.65 1.74 0 2.4l-12.3 14.1c-.33.33-.76.5-1.18.5-.43 0-.86-.17-1.18-.5l-6.21-6.1c-.65-.66-.65-1.74 0-2.41.65-.65 1.71-.65 2.36.01z"
-                            ></path>
-                          </svg>
-                        </span>
-                        <span class="field-state--close">
-                          <svg
-                            version="1.1"
-                            xmlns="http://www.w3.org/2000/svg"
-                            x="0px"
-                            y="0px"
-                            viewBox="0 0 16 16"
-                            enable-background="new 0 0 16 16"
-                            xml:space="preserve"
-                            focusable="false"
-                          >
-                            <path
-                              d="M15.6,15.5c-0.53,0.53-1.38,0.53-1.91,0L8.05,9.87L2.31,15.6c-0.53,0.53-1.38,0.53-1.91,0c-0.53-0.53-0.53-1.38,0-1.9l5.65-5.64L0.4,2.4c-0.53-0.53-0.53-1.38,0-1.91c0.53-0.53,1.38-0.53,1.91,0l5.64,5.63l5.74-5.73c0.53-0.53,1.38-0.53,1.91,0c0.53,0.53,0.53,1.38,0,1.91L9.94,7.94l5.66,5.65C16.12,14.12,16.12,14.97,15.6,15.5z"
-                            ></path>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="field__error" aria-hidden="true" style="display: none"></div>
-                      <div class="fieldset__note">...and some description below</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-area__content">
-                  <div class="fieldsets-batch">
-                    <div class="fieldset fieldset--select fieldset--no-label">
-                      <div class="fieldset__title">One more field</div>
-                      <div>
-                        <div>
-                          <div class="field field--medium field--filled">
-                            <label class="field__label"></label>
-                            <select class="field__select" tabindex="1">
-                              <option value="NEW">New</option>
-                              <option value="REFURBISHED">Refurbished</option>
-                              <option value="USED">Used</option>
-                            </select>
-                            <div class="field__placeholder"></div>
-                            <span class="field-state--success">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="26px"
-                                height="26px"
-                                viewBox="0 0 26 26"
-                                focusable="false"
-                              >
-                                <path
-                                  d="M5 12l5.02 4.9L21.15 4c.65-.66 1.71-.66 2.36 0 .65.67.65 1.74 0 2.4l-12.3 14.1c-.33.33-.76.5-1.18.5-.43 0-.86-.17-1.18-.5l-6.21-6.1c-.65-.66-.65-1.74 0-2.41.65-.65 1.71-.65 2.36.01z"
-                                ></path>
-                              </svg>
-                            </span>
-                            <span class="field-state--close">
-                              <svg
-                                version="1.1"
-                                xmlns="http://www.w3.org/2000/svg"
-                                x="0px"
-                                y="0px"
-                                viewBox="0 0 16 16"
-                                enable-background="new 0 0 16 16"
-                                xml:space="preserve"
-                                focusable="false"
-                              >
-                                <path
-                                  d="M15.6,15.5c-0.53,0.53-1.38,0.53-1.91,0L8.05,9.87L2.31,15.6c-0.53,0.53-1.38,0.53-1.91,0 c-0.53-0.53-0.53-1.38,0-1.9l5.65-5.64L0.4,2.4c-0.53-0.53-0.53-1.38,0-1.91c0.53-0.53,1.38-0.53,1.91,0l5.64,5.63l5.74-5.73 c0.53-0.53,1.38-0.53,1.91,0c0.53,0.53,0.53,1.38,0,1.91L9.94,7.94l5.66,5.65C16.12,14.12,16.12,14.97,15.6,15.5z"
-                                ></path>
-                              </svg>
-                            </span>
-                            <span class="field__arrow">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 26 26"
-                                focusable="false"
-                              >
-                                <path
-                                  d="M7.85 10l5.02 4.9 5.27-4.9c.65-.66 1.71-.66 2.36 0 .65.67.65 1.74 0 2.4l-6.45 6.1c-.33.33-.76.5-1.18.5-.43 0-.86-.17-1.18-.5l-6.21-6.1c-.65-.66-.65-1.74 0-2.41.66-.65 1.72-.65 2.37.01z"
-                                ></path>
-                              </svg>
-                            </span>
-                          </div>
-                        </div>
-                        <div class="field__error" aria-hidden="true" style="display: none"></div>
-                      </div>
-                      <div class="fieldset__note"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-area__action">
-                  <button type="button" class="btn btn-primary btn-medium" tabindex="5">
-                    Save
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
