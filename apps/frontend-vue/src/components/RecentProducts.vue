@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useFetch } from '@vueuse/core'
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import ProductItem from './ProductItem.vue'
 
 const { data, error, isFetching } = useFetch(

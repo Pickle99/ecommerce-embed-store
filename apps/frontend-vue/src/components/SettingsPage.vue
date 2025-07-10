@@ -1,11 +1,6 @@
 <template>
-  <head>
-    <link
-      rel="stylesheet"
-      href="https://d35z3p2poghz10.cloudfront.net/ecwid-sdk/css/1.3.18/ecwid-app-ui.css"
-    />
-  </head>
-  <div class="settings-page cf" style="padding: 1.5rem">
+  <div v-if="!stylesLoaded">Loading styles...</div>
+  <div v-else class="settings-page cf" style="padding: 1.5rem">
     <div class="settings-page__header">
       <div class="settings-page__titles settings-page__titles--left">
         <h1 class="settings-page__title">Store onwer Settings page</h1>
@@ -84,8 +79,40 @@
 </template>
 
 <script setup lang="ts">
+import { useFetch } from '@vueuse/core'
+import { computed, ref, onMounted } from 'vue'
 import ProductTableList from './ProductTableList.vue'
 import SettingToggle from './SettingToggle.vue'
 import EyeIcon from './icons/EyeIcon.vue'
 import NumberedListIcon from './icons/NumberedListIcon.vue'
+
+const { data, error, isFetching } = useFetch('http://localhost:8000/rup-settings').json()
+
+const settings = computed(() => data.value?.settings ?? [])
+
+const stylesLoaded = ref(false)
+
+onMounted(() => {
+  const existing = document.querySelector('link[href*="ecwid-app-ui.css"]') as HTMLLinkElement
+
+  if (existing) {
+    if (existing.sheet) {
+      stylesLoaded.value = true // already loaded
+    } else {
+      existing.addEventListener('load', () => {
+        stylesLoaded.value = true
+      })
+    }
+  } else {
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = 'https://d35z3p2poghz10.cloudfront.net/ecwid-sdk/css/1.3.18/ecwid-app-ui.css'
+
+    link.onload = () => {
+      stylesLoaded.value = true
+    }
+
+    document.head.appendChild(link)
+  }
+})
 </script>

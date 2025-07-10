@@ -18,6 +18,21 @@ type CountRequest = FastifyRequest<{
 // RUP - stands for recently updated products (just shortened)
 
 export async function appRoutes(fastify: FastifyInstance) {
+  fastify.get('/rup-settings', async (_, reply) => {
+    const settings = await prisma.settings.findFirst({
+      select: {
+        recently_updated_products_visibility: true,
+        recently_updated_products_visibility_count: true,
+      },
+    })
+
+    if (!settings) {
+      return reply.code(404).send({ error: 'Settings not found' })
+    }
+
+    return { settings }
+  })
+
   fastify.put('/rup-toggle', async (request: ToggleRequest, reply) => {
     const { recently_updated_products_visibility } = request.body
 
