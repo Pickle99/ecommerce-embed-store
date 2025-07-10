@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   product: {
     id: number
     name: string
@@ -7,6 +7,11 @@ defineProps<{
     imageUrl: string
   }
 }>()
+
+function addToCart() {
+  //@ts-ignore
+  Ecwid.Cart.addProduct(props.product.id, 1)
+}
 </script>
 
 <template>
@@ -24,7 +29,7 @@ defineProps<{
         <p>{{ product.name }}</p>
       </div>
       <div class="live-picture__footer">
-        <button class="btn btn-primary">Add to cart</button>
+        <button @click="addToCart" class="btn btn-primary">Add to cart</button>
       </div>
     </div>
   </div>
