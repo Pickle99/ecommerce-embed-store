@@ -10,7 +10,7 @@ const props = defineProps<{
 
 function addToCart() {
   //@ts-ignore
-  Ecwid.Cart.addProduct(props.product.id, 1)
+  Ecwid.Cart.addProduct(props.product.id)
 }
 </script>
 
