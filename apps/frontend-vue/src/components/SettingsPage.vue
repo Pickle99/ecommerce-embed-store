@@ -1,6 +1,11 @@
 <template>
-  <div v-if="!stylesLoaded">Loading styles...</div>
-  <div v-else class="settings-page cf" style="padding: 1.5rem">
+  <div class="settings-page cf" style="padding: 1.5rem">
+    <div @click="goBackToStore" style="display: flex; align-items: center; gap: 0.7rem">
+      <div>
+        <LongArrowLeftIcon />
+      </div>
+      <h1 style="color: blue">Redirect back to store</h1>
+    </div>
     <div class="settings-page__header">
       <div class="settings-page__titles settings-page__titles--left">
         <h1 class="settings-page__title">Store onwer Settings page</h1>
@@ -56,6 +61,7 @@
           description="Enable/Disable recently updated products widget visibility"
           actionButton="toggle"
           :settingsData="settings"
+          @toggle="updateWidgetVisibility"
         />
 
         <SettingToggle
@@ -64,6 +70,7 @@
           actionButton="dropdown"
           :settingsData="settings"
         />
+
         <ProductTableList />
       </div>
     </div>
@@ -75,12 +82,42 @@ import { useFetch } from '@vueuse/core'
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import SettingToggle from './SettingToggle.vue'
 import ProductTableList from './ProductTableList.vue'
+import LongArrowLeftIcon from './icons/LongArrowLeftIcon.vue'
+import { useRouter } from 'vue-router'
 
 const { data, error, isFetching } = useFetch('http://localhost:8000/rup-settings').json()
 
 const settings = computed(() => data.value?.settings ?? [])
 
-const stylesLoaded = ref(true)
+const router = useRouter()
+
+function goBackToStore() {
+  router.push('/')
+}
+
+async function updateWidgetVisibility(newValue: boolean) {
+  try {
+    const response = await fetch('http://localhost:8000/rup-toggle', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        recently_updated_products_visibility: newValue,
+      }),
+    })
+
+    if (!response.ok) {
+      throw new Error('Failed to update setting')
+    }
+
+    const result = await response.json()
+    console.log('Setting updated:', result)
+
+    // Optional: update settings locally
+    settings.value.recently_updated_products_visibility = newValue
+  } catch (error) {
+    console.error('Error updating widget visibility:', error)
+  }
+}
 </script>
 
 <style>

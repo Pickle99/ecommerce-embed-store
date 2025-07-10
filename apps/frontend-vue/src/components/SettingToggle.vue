@@ -4,8 +4,8 @@
       <div class="iconable-block iconable-block--hide-in-mobile">
         <div class="iconable-block__infographics">
           <span class="iconable-block__icon">
-            <EyeIcon v-if="actionButton === 'toggle'" />
-            <NumberedListIcon v-if="actionButton === 'dropdown'" />
+            <LockIcon v-if="actionButton === 'toggle'" />
+            <DropdownListIcon v-if="actionButton === 'dropdown'" />
           </span>
         </div>
         <div class="iconable-block__content">
@@ -49,6 +49,7 @@
                       name=""
                       type="checkbox"
                       :checked="settingsData.recently_updated_products_visibility"
+                      @change="onToggleChange"
                     />
                     <div>
                       <div></div>
@@ -66,8 +67,11 @@
 
 <script setup lang="ts">
 import { RupSettings } from '../types'
-import EyeIcon from './icons/EyeIcon.vue'
-import NumberedListIcon from './icons/NumberedListIcon.vue'
+import { defineEmits } from 'vue'
+import LockIcon from './icons/LockIcon.vue'
+import DropdownListIcon from './icons/DropdownListIcon.vue'
+
+const emit = defineEmits(['toggle'])
 
 defineProps<{
   title: string
@@ -75,4 +79,9 @@ defineProps<{
   actionButton: 'toggle' | 'dropdown'
   settingsData: RupSettings
 }>()
+
+function onToggleChange(event: Event) {
+  const input = event.target as HTMLInputElement
+  emit('toggle', input.checked)
+}
 </script>
