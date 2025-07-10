@@ -50,69 +50,39 @@
             </div>
           </div>
         </div>
-        <div class="named-area__body">
-          <SettingToggle
-            title="RUP widget"
-            description="Enable/Disable recently updated products widget visibility"
-            actionButton="toggle"
-          >
-            <template #icon>
-              <EyeIcon />
-            </template>
-          </SettingToggle>
 
-          <SettingToggle
-            title="Products visibility on RUP widget by default"
-            description="Set how many Products are visible on RUP widget by default"
-            actionButton="dropdown"
-          >
-            <template #icon>
-              <NumberedListIcon />
-            </template>
-          </SettingToggle>
-        </div>
+        <SettingToggle
+          title="RUP widget"
+          description="Enable/Disable recently updated products widget visibility"
+          actionButton="toggle"
+          :settingsData="settings"
+        />
+
+        <SettingToggle
+          title="Products visibility on RUP widget by default"
+          description="Set how many Products are visible on RUP widget by default"
+          actionButton="dropdown"
+          :settingsData="settings"
+        />
+        <ProductTableList />
       </div>
-
-      <ProductTableList />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useFetch } from '@vueuse/core'
-import { computed, ref, onMounted } from 'vue'
-import ProductTableList from './ProductTableList.vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 import SettingToggle from './SettingToggle.vue'
-import EyeIcon from './icons/EyeIcon.vue'
-import NumberedListIcon from './icons/NumberedListIcon.vue'
+import ProductTableList from './ProductTableList.vue'
 
 const { data, error, isFetching } = useFetch('http://localhost:8000/rup-settings').json()
 
 const settings = computed(() => data.value?.settings ?? [])
 
-const stylesLoaded = ref(false)
-
-onMounted(() => {
-  const existing = document.querySelector('link[href*="ecwid-app-ui.css"]') as HTMLLinkElement
-
-  if (existing) {
-    if (existing.sheet) {
-      stylesLoaded.value = true // already loaded
-    } else {
-      existing.addEventListener('load', () => {
-        stylesLoaded.value = true
-      })
-    }
-  } else {
-    const link = document.createElement('link')
-    link.rel = 'stylesheet'
-    link.href = 'https://d35z3p2poghz10.cloudfront.net/ecwid-sdk/css/1.3.18/ecwid-app-ui.css'
-
-    link.onload = () => {
-      stylesLoaded.value = true
-    }
-
-    document.head.appendChild(link)
-  }
-})
+const stylesLoaded = ref(true)
 </script>
+
+<style>
+@import url('https://d35z3p2poghz10.cloudfront.net/ecwid-sdk/css/1.3.18/ecwid-app-ui.css');
+</style>

@@ -4,7 +4,9 @@
       <div class="iconable-block iconable-block--hide-in-mobile">
         <div class="iconable-block__infographics">
           <span class="iconable-block__icon">
-            <slot name="icon" />
+            <EyeIcon v-if="actionButton === 'toggle'" />
+            <!-- fallback (optional) -->
+            <NumberedListIcon v-if="actionButton === 'dropdown'" />
           </span>
         </div>
         <div class="iconable-block__content">
@@ -44,7 +46,11 @@
                 </div>
                 <div v-else-if="actionButton === 'toggle'" class="status-block__primary-action">
                   <label class="checkbox big">
-                    <input name="" type="checkbox" checked="true" />
+                    <input
+                      name=""
+                      type="checkbox"
+                      :checked="settingsData.recently_updated_products_visibility"
+                    />
                     <div>
                       <div></div>
                     </div>
@@ -60,11 +66,14 @@
 </template>
 
 <script setup lang="ts">
+import { RupSettings } from '../types'
 import EyeIcon from './icons/EyeIcon.vue'
+import NumberedListIcon from './icons/NumberedListIcon.vue'
 
 defineProps<{
   title: string
   description: string
   actionButton: 'toggle' | 'dropdown'
+  settingsData: RupSettings
 }>()
 </script>
