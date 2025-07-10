@@ -98,7 +98,10 @@ async function updateWidgetVisibility(newValue: boolean) {
   try {
     const response = await fetch('http://localhost:8000/rup-toggle', {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
       body: JSON.stringify({
         recently_updated_products_visibility: newValue,
       }),

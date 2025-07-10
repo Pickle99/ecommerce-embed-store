@@ -18,6 +18,7 @@ const prisma = new PrismaClient()
 
 fastify.register(cors, {
   origin: ['http://localhost:3000', 'http://localhost:3333'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 })
 
