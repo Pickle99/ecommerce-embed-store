@@ -4,5 +4,8 @@
   "private": true,
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "dependencies": {
+    "vue": "^3.5.17"
+  }
 }

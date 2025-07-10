@@ -8,9 +8,6 @@
 import { onMounted, nextTick } from 'vue'
 import { createApp } from 'vue'
 import RecentProducts from './components/RecentProducts.vue'
-import { useInterfaceStore } from './store/useInterfaceStore'
-
-const interfaceStore = useInterfaceStore()
 
 function initCartEnhancements() {
   // @ts-ignore
@@ -67,7 +64,7 @@ function initCartEnhancements() {
         const newA = document.createElement('a')
         newA.className =
           'ec-footer__link ec-link ec-link--muted link--icon-top footer__link--shopping-cart'
-        newA.href = 'http://localhost:3000/settings'
+        newA.href = 'http://localhost:3333/settings'
 
         const newSpan = document.createElement('span')
         newSpan.className = 'svg-icon'

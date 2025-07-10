@@ -56,7 +56,7 @@
           </div>
         </div>
 
-        <SettingToggle
+        <SettingButton
           title="RUP widget"
           description="Enable/Disable recently updated products widget visibility"
           actionButton="toggle"
@@ -64,7 +64,7 @@
           @toggle="updateWidgetVisibility"
         />
 
-        <SettingToggle
+        <SettingButton
           title="Products visibility on RUP widget by default"
           description="Set how many Products are visible on RUP widget by default"
           actionButton="dropdown"
@@ -79,10 +79,10 @@
 
 <script setup lang="ts">
 import { useFetch } from '@vueuse/core'
-import { computed, ref, onMounted, onUnmounted } from 'vue'
-import SettingToggle from './SettingToggle.vue'
+import { computed } from 'vue'
+import SettingButton from './SettingButton.vue'
 import ProductTableList from './ProductTableList.vue'
-import LongArrowLeftIcon from './icons/LongArrowLeftIcon.vue'
+import LongArrowLeftIcon from '../icons/LongArrowLeftIcon.vue'
 
 const { data, error, isFetching } = useFetch('http://localhost:8000/rup-settings').json()
 
@@ -105,7 +105,6 @@ async function updateWidgetVisibility(newValue: boolean) {
     const result = await response.json()
     console.log('Setting updated:', result)
 
-    // Optional: update settings locally
     settings.value.recently_updated_products_visibility = newValue
   } catch (error) {
     console.error('Error updating widget visibility:', error)

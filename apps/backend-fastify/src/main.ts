@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename)
 const prisma = new PrismaClient()
 
 fastify.register(cors, {
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'http://localhost:3333'],
   credentials: true,
 })
 
