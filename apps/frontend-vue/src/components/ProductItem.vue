@@ -8,9 +8,15 @@ const props = defineProps<{
   }
 }>()
 
-function addToCart() {
+function addToCart(e: Event) {
+  e.stopPropagation()
   //@ts-ignore
   Ecwid.Cart.addProduct(props.product.id)
+}
+
+function openProductPage() {
+  // @ts-ignore
+  Ecwid.openPage('product', { id: props.product.id })
 }
 </script>
 
@@ -22,6 +28,7 @@ function addToCart() {
       width: '18%',
       'min-width': '180px',
     }"
+    @click="openProductPage"
   >
     <div class="live-picture live-picture--startersite" style="height: 10rem">
       <div class="live-picture__header">{{ product.defaultDisplayedPriceFormatted }}</div>
