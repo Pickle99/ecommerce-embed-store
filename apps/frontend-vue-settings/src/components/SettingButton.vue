@@ -81,7 +81,6 @@ defineProps<{
 
 function onToggleChange(event: Event) {
   const input = event.target as HTMLInputElement
-  console.log('ok')
   emit('toggle', input.checked)
 }
 </script>

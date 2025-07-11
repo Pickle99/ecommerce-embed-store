@@ -84,6 +84,14 @@ export async function appRoutes(fastify: FastifyInstance) {
         return reply.code(500).send({ error: 'Missing Ecwid API credentials' })
       }
 
+      // Parse query string: ?limit=3
+      const query = request.query as { limit?: string }
+      const limitFromQuery = query.limit ? parseInt(query.limit, 10) : undefined
+
+      if (limitFromQuery !== undefined && (isNaN(limitFromQuery) || limitFromQuery <= 0)) {
+        return reply.code(400).send({ error: 'Invalid limit value' })
+      }
+
       const settings = await prisma.settings.findFirst({
         select: {
           recently_updated_products_visibility: true,
@@ -113,10 +121,16 @@ export async function appRoutes(fastify: FastifyInstance) {
       }
 
       const data = await res.json()
-      const count = settings.recently_updated_products_visibility_count
+      const count = limitFromQuery ?? settings.recently_updated_products_visibility_count
 
       return {
-        products: (data.items ?? []).slice(0, count),
+        products: (data.items ?? [])
+          .sort(
+            (a: { updateTimestamp: number }, b: { updateTimestamp: number }) =>
+              b.updateTimestamp - a.updateTimestamp
+          )
+          .slice(0, count),
+        defaultLimit: settings.recently_updated_products_visibility_count ?? 3,
       }
     } catch (error) {
       console.error('Error fetching products:', error)
