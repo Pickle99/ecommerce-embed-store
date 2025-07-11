@@ -20,3 +20,11 @@ model Settings {
 
   @@map("settings")
 } 
+
+model RecentlyUpdatedProductsFromOrder {
+  id        Int    @id @default(autoincrement())
+  orderId   Int    @unique
+  productId Int[]
+
+  @@map("recently_updated_products_from_order")
+}

@@ -20,6 +20,11 @@ type Params = {
   orderId: string
 }
 
+type AddRupExtraFieldDto = {
+  orderId: number
+  productId: number[]
+}
+
 // RUP - stands for recently updated products (just shortened)
 
 export async function appRoutes(fastify: FastifyInstance) {
@@ -152,26 +157,32 @@ export async function appRoutes(fastify: FastifyInstance) {
     }
   })
 
-  fastify.post<{ Params: Params }>(
+  fastify.post<{ Params: Params; Body: AddRupExtraFieldDto }>(
     '/orders/:orderId/add-rup-extra-field',
     async (request, reply) => {
       const storeId = process.env.ECWID_STORE_ID
       const apiKey = process.env.ECWID_TOKEN
-      const orderId = request.params.orderId
-
-      const requestBody = request.body
-      console.log(requestBody, 'requestBody')
+      const { orderId, productId } = request.body
 
       if (!storeId || !apiKey) {
         return reply.code(500).send({ error: 'Missing Ecwid API credentials' })
       }
 
       try {
+        const saved = await prisma.recentlyUpdatedProductsFromOrder.create({
+          data: {
+            orderId,
+            productId,
+          },
+        })
+
         const result = await addRUPExtraFieldToOrder(storeId, apiKey, orderId)
-        return reply.send({ success: true, data: result })
+
+        return reply.send({ success: true, saved, ecwidResponse: result })
       } catch (error) {
-        fastify.log.error('Error adding extra field:', error)
-        return reply.code(500).send({ error: 'Failed to add extra field' })
+        request.log.error('Error saving to DB or adding extra field:', error)
+
+        return reply.code(500).send({ error: 'Internal server error' })
       }
     }
   )

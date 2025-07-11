@@ -1,6 +1,6 @@
 import crypto from 'crypto'
 
-export async function addRUPExtraFieldToOrder(storeId: string, apiKey: string, orderId: string) {
+export async function addRUPExtraFieldToOrder(storeId: string, apiKey: string, orderId: number) {
   const randomId = crypto.randomBytes(6).toString('hex')
   const url = `https://app.ecwid.com/api/v3/${storeId}/orders/${orderId}/extraFields`
 
