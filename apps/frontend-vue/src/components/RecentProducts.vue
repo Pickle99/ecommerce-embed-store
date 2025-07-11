@@ -32,6 +32,7 @@
       <div v-else-if="error">{{ error.message }}</div>
       <div v-else-if="products.length === 0">No products found.</div>
       <div
+        v-else
         class="list_products"
         :style="{
           display: 'flex',
@@ -56,7 +57,7 @@ const localLimit = localStorage.getItem('selectedLimit')
 
 const selectedLimitReady = ref(false)
 
-const selectedLimit = ref(5)
+const selectedLimit = ref(localLimit ?? 5)
 
 const limitOptions = Array.from({ length: 10 }, (_, i) => i + 1)
 
