@@ -9,9 +9,20 @@ const props = defineProps<{
 }>()
 
 function addToCart(e: Event) {
-  e.stopPropagation()
   //@ts-ignore
   Ecwid.Cart.addProduct(props.product.id)
+  const key = 'from_rup_to_cart'
+
+  // Get existing list or default to empty array
+  const existing = JSON.parse(localStorage.getItem(key) || '[]')
+
+  // Add current product ID as string (if not already included)
+  if (!existing.includes(props.product.id)) {
+    existing.push(props.product.id)
+  }
+
+  // Save back to localStorage
+  localStorage.setItem(key, JSON.stringify(existing))
 }
 
 function openProductPage() {
@@ -36,7 +47,7 @@ function openProductPage() {
         <p>{{ product.name }}</p>
       </div>
       <div class="live-picture__footer">
-        <button @click="addToCart" class="btn btn-primary">Add to cart</button>
+        <button @click.stop="addToCart" class="btn btn-primary">Add to cart</button>
       </div>
     </div>
   </div>
