@@ -5,7 +5,49 @@ import { onMounted, nextTick } from 'vue'
 import { createApp } from 'vue'
 import RecentProducts from './components/RecentProducts.vue'
 
+type OrderItemType = {
+  product: {
+    price: number
+    name: string
+    weight: number
+    id: number
+    shortDescription: string
+    sku: string
+    url: string
+  }
+  quantity: number
+  options: {
+    [optionName: string]: string
+  }
+}
+
 function initCartEnhancements() {
+  //@ts-ignore
+  Ecwid.OnOrderPlaced.add((order) => {
+    const payload = {
+      orderId: order.orderNumber,
+      productId: order.items.map((item: OrderItemType) => item.product.id),
+    }
+
+    fetch(`http://localhost:8000/orders/${payload.orderId}/add-rup-extra-field`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to notify backend')
+        return res.json()
+      })
+      .then((data) => {
+        console.log('Backend notified successfully:', data)
+      })
+      .catch((err) => {
+        console.error('Error notifying backend:', err)
+      })
+  })
+
   // @ts-ignore
   Ecwid.OnPageLoaded.add(function (page: any) {
     if (page.type === 'CART') {

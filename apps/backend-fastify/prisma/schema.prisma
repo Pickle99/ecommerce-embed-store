@@ -9,12 +9,14 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DB_DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Settings {
   id                                         Int     @id @default(autoincrement())
   recently_updated_products_visibility       Boolean @default(true)
   recently_updated_products_visibility_count Int     @default(3)
+
+  @@map("settings")
 } 

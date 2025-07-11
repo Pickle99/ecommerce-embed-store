@@ -1,5 +1,6 @@
 import { FastifyInstance, FastifyRequest } from 'fastify'
 import { PrismaClient } from '@prisma/client'
+import { addRUPExtraFieldToOrder } from '../services'
 
 const prisma = new PrismaClient()
 
@@ -14,6 +15,10 @@ type CountRequest = FastifyRequest<{
     recently_updated_products_visibility_count: number
   }
 }>
+
+type Params = {
+  orderId: string
+}
 
 // RUP - stands for recently updated products (just shortened)
 
@@ -113,4 +118,61 @@ export async function appRoutes(fastify: FastifyInstance) {
       return reply.code(500).send({ error: 'Unexpected server error' })
     }
   })
+
+  fastify.get('/orders-from-rup', async (request, reply) => {
+    try {
+      const storeId = process.env.ECWID_STORE_ID
+      const apiKey = process.env.ECWID_TOKEN
+
+      if (!storeId || !apiKey) {
+        return reply.code(500).send({ error: 'Missing Ecwid API credentials' })
+      }
+
+      const res = await fetch(`https://app.ecwid.com/api/v3/${storeId}/products`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      })
+
+      console.log(res, 'res')
+
+      if (!res.ok) {
+        const errorBody = await res.text()
+        return reply
+          .code(res.status)
+          .send({ error: 'Failed to fetch products from Ecwid', body: errorBody })
+      }
+
+      const data = await res.json()
+      return reply.send(data)
+    } catch (error) {
+      console.error('Error fetching Ecwid products:', error)
+      return reply.code(500).send({ error: 'Unexpected server error' })
+    }
+  })
+
+  fastify.post<{ Params: Params }>(
+    '/orders/:orderId/add-rup-extra-field',
+    async (request, reply) => {
+      const storeId = process.env.ECWID_STORE_ID
+      const apiKey = process.env.ECWID_TOKEN
+      const orderId = request.params.orderId
+
+      const requestBody = request.body
+      console.log(requestBody, 'requestBody')
+
+      if (!storeId || !apiKey) {
+        return reply.code(500).send({ error: 'Missing Ecwid API credentials' })
+      }
+
+      try {
+        const result = await addRUPExtraFieldToOrder(storeId, apiKey, orderId)
+        return reply.send({ success: true, data: result })
+      } catch (error) {
+        fastify.log.error('Error adding extra field:', error)
+        return reply.code(500).send({ error: 'Failed to add extra field' })
+      }
+    }
+  )
 }
