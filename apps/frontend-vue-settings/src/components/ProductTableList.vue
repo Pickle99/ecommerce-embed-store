@@ -1,5 +1,5 @@
 <template>
-  <div class="toolbar">
+  <div class="toolbar" :style="products.length == 0 ? 'padding-bottom: 15rem' : ''">
     <button type="button" class="btn btn-default btn-medium">Export As a CSV</button>
     <button type="button" class="btn btn-default btn-medium">Export As a XLSX</button>
   </div>
@@ -79,109 +79,59 @@
     </div>
   </div>
 
-  <div class="filtered-list__items long-list">
-    <div class="list-element list-element--compact list-element--has-hover">
+  <div v-if="products.length > 0" class="filtered-list__items long-list">
+    <div
+      v-for="item in products"
+      :key="item.id"
+      class="list-element list-element--compact list-element--has-hover"
+    >
       <div class="list-element__toggle">
         <input
           type="checkbox"
           value="on"
-          id="gwt-uid-1455"
+          :id="item.id.toString()"
           tabindex="0"
           class="list-element__toggle-checkbox"
         />
-        <label for="gwt-uid-1455" class="list-element__toggle-label"></label>
+        <label :for="item.id.toString()" class="list-element__toggle-label"></label>
       </div>
       <div class="list-element__image">
-        <img src="https://dpbfm6h358sh7.cloudfront.net/default-store/black_dress_160px.jpg" />
+        <img :src="item.smallThumbnailUrl" />
       </div>
       <div class="list-element__content">
         <div class="list-element__info">
           <div class="list-element__header">
             <div class="list-element__main-info">
               <div class="list-element__title">
-                <span>SAMPLE. Black Dress</span>
+                <span>{{ item.name }}</span>
               </div>
-              <div class="list-element__description"><span class="muted">0001</span></div>
+              <div class="list-element__description">
+                <span class="muted">Added from RUP - {{ item.id }} times</span>
+              </div>
             </div>
-            <div class="list-element__price">$44.95</div>
           </div>
           <div class="list-element__data-row">
             Perfect for wearing with your favorite flat sandals or trendy sneakers.
           </div>
         </div>
         <div class="list-element__actions">
-          <div class="list-element__price">$44.95</div>
+          <div class="list-element__price">{{ item.defaultDisplayedPriceFormatted }}</div>
         </div>
       </div>
-      <div class="list-element__move-forward-arrow"></div>
-    </div>
-    <div class="list-element list-element--compact list-element--has-hover">
-      <div class="list-element__toggle">
-        <input
-          type="checkbox"
-          value="on"
-          id="gwt-uid-1456"
-          tabindex="0"
-          class="list-element__toggle-checkbox"
-        />
-        <label for="gwt-uid-1456" class="list-element__toggle-label"></label>
-      </div>
-      <div class="list-element__image">
-        <img src="https://dpbfm6h358sh7.cloudfront.net/default-store/black_tank_160px.jpg" />
-      </div>
-      <div class="list-element__content">
-        <div class="list-element__info">
-          <div class="list-element__header">
-            <div class="list-element__main-info">
-              <div class="list-element__title">
-                <span>SAMPLE. Black Tank</span>
-              </div>
-              <div class="list-element__description"><span class="muted">0002</span></div>
-            </div>
-            <div class="list-element__price">$19.95</div>
-          </div>
-          <div class="list-element__data-row">Perfect for a day in the sun.</div>
-        </div>
-        <div class="list-element__actions">
-          <div class="list-element__price">$19.95</div>
-        </div>
-      </div>
-      <div class="list-element__move-forward-arrow"></div>
-    </div>
-    <div class="list-element list-element--compact list-element--has-hover">
-      <div class="list-element__toggle">
-        <input
-          type="checkbox"
-          value="on"
-          id="gwt-uid-1457"
-          tabindex="0"
-          class="list-element__toggle-checkbox"
-        />
-        <label for="gwt-uid-1457" class="list-element__toggle-label"></label>
-      </div>
-      <div class="list-element__image">
-        <img src="https://dpbfm6h358sh7.cloudfront.net/default-store/jade_tank_160px.jpg" />
-      </div>
-      <div class="list-element__content">
-        <div class="list-element__info">
-          <div class="list-element__header">
-            <div class="list-element__main-info">
-              <div class="list-element__title">
-                <span>SAMPLE. Jade Tank</span>
-              </div>
-              <div class="list-element__description"><span class="muted">0003</span></div>
-            </div>
-            <div class="list-element__price">$18.95</div>
-          </div>
-          <div class="list-element__data-row">
-            This lightweight crinkle gauze tank features an allover floral print.
-          </div>
-        </div>
-        <div class="list-element__actions">
-          <div class="list-element__price">$18.95</div>
-        </div>
-      </div>
-      <div class="list-element__move-forward-arrow"></div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+const props = defineProps<{
+  products: {
+    id: number
+    name: string
+    description: string
+    defaultDisplayedPriceFormatted: string
+    smallThumbnailUrl: string
+  }[]
+}>()
+
+console.log(props.products, '2')
+</script>

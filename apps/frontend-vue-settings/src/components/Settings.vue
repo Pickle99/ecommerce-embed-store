@@ -46,11 +46,12 @@
             description="Set how many Products are visible on RUP widget by default"
             actionButton="dropdown"
             :settingsData="settings"
+            :defaultLimit="settings.recently_updated_products_visibility_count"
           />
         </div>
       </div>
     </div>
-    <ProductTableList />
+    <ProductTableList :products="products" />
   </div>
 </template>
 
@@ -65,9 +66,15 @@ function handleRedirectToStore() {
   window.location.href = 'http://localhost:8000'
 }
 
-const { data, error, isFetching } = useFetch('http://localhost:8000/rup-settings').json()
+const { data: rupSettingsData } = useFetch('http://localhost:8000/rup-settings').json()
 
-const settings = computed(() => data.value?.settings ?? [])
+const { data: rupProductsData } = useFetch(
+  'http://localhost:8000/recently-updated-products?limit=10' // we have limit query, max 10, so just write limit=10 to see all
+).json()
+
+const products = computed(() => rupProductsData.value?.products ?? [])
+
+const settings = computed(() => rupSettingsData.value?.settings ?? [])
 
 async function updateWidgetVisibility(newValue: boolean) {
   try {

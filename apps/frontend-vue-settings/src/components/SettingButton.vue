@@ -103,11 +103,12 @@ import { useAutoReset } from '../composables/useAutoReset'
 
 const emit = defineEmits(['toggle'])
 
-defineProps<{
+const props = defineProps<{
   title: string
   description: string
   actionButton: 'toggle' | 'dropdown'
   settingsData: RupSettings
+  defaultLimit?: number
 }>()
 
 const successFromResponse = ref(false)
@@ -115,15 +116,9 @@ const errorFromResponse = ref(false)
 
 const numberValue = ref(0)
 
-const recentlyUpdatedProducts = computed(() => `http://localhost:8000/recently-updated-products`)
-
-const { data, error, isFetching, execute } = useFetch(recentlyUpdatedProducts, { immediate: true })
-  .get()
-  .json()
-
-watch(data, () => {
-  if (data.value?.defaultLimit) {
-    numberValue.value = data.value.defaultLimit
+watch(props, () => {
+  if (props.defaultLimit) {
+    numberValue.value = props.defaultLimit
   }
 })
 
