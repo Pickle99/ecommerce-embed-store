@@ -24,24 +24,39 @@ type OrderItemType = {
 function initCartEnhancements() {
   //@ts-ignore
   Ecwid.OnOrderPlaced.add((order) => {
-    const payload = {
-      orderId: order.orderNumber,
-      productId: order.items.map((item: OrderItemType) => item.product.id),
+    const itemsProductIds = order.items.map((item: OrderItemType) => item.product.id)
+
+    // @ts-ignore
+    const extraFields = ec?.order?.extraFields || {}
+    const matchingProductIds: number[] = []
+
+    for (const key in extraFields) {
+      // Example key: added_from_rup_product_id_123
+      const match = key.match(/added_from_rup_product_id_(\d+)/)
+      if (match) {
+        const productId = match[1]
+        if (itemsProductIds.includes(parseInt(productId))) {
+          matchingProductIds.push(parseInt(productId))
+        }
+      }
     }
 
-    fetch(`http://localhost:8000/orders/${payload.orderId}/add-rup-extra-field`, {
+    fetch(`http://localhost:8000/ordered-from-rup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        orderId: order.orderNumber,
+        productId: matchingProductIds,
+      }),
     })
       .then((res) => {
         if (!res.ok) throw new Error('Failed to notify backend')
         return res.json()
       })
       .then((data) => {
-        console.log('Backend notified successfully:', data)
+        console.log('success', data)
       })
       .catch((err) => {
         console.error('Error notifying backend:', err)

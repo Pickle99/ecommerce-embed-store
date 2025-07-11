@@ -8,23 +8,28 @@ const props = defineProps<{
   }
 }>()
 
-function addToCart(e: Event) {
-  //@ts-ignore
-  Ecwid.Cart.addProduct(props.product.id)
-  const key = 'from_rup_to_cart'
+function addToCart() {
+  const fieldTitle = `added_from_rup_product_id_${props.product.id}`
+  const title = `product_id=${props.product.id} was added to cart from RUP widget`
 
-  // Get existing list or default to empty array
-  const existing = JSON.parse(localStorage.getItem(key) || '[]')
-
-  // Add current product ID as string (if not already included)
-  if (!existing.includes(props.product.id)) {
-    existing.push(props.product.id)
+  // @ts-ignore
+  window.ec = window.ec || {}
+  // @ts-ignore
+  ec.order = ec.order || {}
+  // @ts-ignore
+  ec.order.extraFields = ec.order.extraFields || {}
+  // @ts-ignore
+  ec.order.extraFields[fieldTitle] = {
+    title: title,
+    type: 'empty',
+    productId: props.product.id,
   }
+  // @ts-ignore
+  Ecwid.refreshConfig && Ecwid.refreshConfig()
 
-  // Save back to localStorage
-  localStorage.setItem(key, JSON.stringify(existing))
+  // @ts-ignore
+  Ecwid.Cart.addProduct(props.product.id)
 }
-
 function openProductPage() {
   // @ts-ignore
   Ecwid.openPage('product', { id: props.product.id })
