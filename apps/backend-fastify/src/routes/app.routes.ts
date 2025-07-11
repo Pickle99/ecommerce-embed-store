@@ -62,6 +62,16 @@ export async function appRoutes(fastify: FastifyInstance) {
   fastify.put('/rup-count', async (request: CountRequest, reply) => {
     const { recently_updated_products_visibility_count } = request.body
 
+    if (
+      typeof recently_updated_products_visibility_count !== 'number' ||
+      recently_updated_products_visibility_count < 1 ||
+      recently_updated_products_visibility_count > 10
+    ) {
+      return reply.code(400).send({
+        error: 'Count must be a number between 1 and 10',
+      })
+    }
+
     const existing = await prisma.settings.findFirst()
     if (!existing) {
       return reply.code(404).send({ error: 'Settings not found' })

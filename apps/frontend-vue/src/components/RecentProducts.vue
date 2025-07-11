@@ -3,15 +3,16 @@ import { useFetch } from '@vueuse/core'
 import { ref, computed, watch } from 'vue'
 import ProductItem from './ProductItem.vue'
 
-// Track if selectedLimit is ready
+// Load localStorage if any
+const localLimit = localStorage.getItem('selectedLimit')
+
 const selectedLimitReady = ref(false)
 
-// Load from localStorage or temporary fallback
-const savedLimit = localStorage.getItem('selectedLimit')
-const selectedLimit = ref(savedLimit ? Number(savedLimit) : 5)
+const selectedLimit = ref(5)
 
 const limitOptions = Array.from({ length: 10 }, (_, i) => i + 1)
 
+// Computed fetch URL
 const url = computed(
   () => `http://localhost:8000/recently-updated-products?limit=${selectedLimit.value}`
 )
@@ -20,16 +21,25 @@ const { data, error, isFetching, execute } = useFetch(url, { immediate: true }).
 
 const products = computed(() => data.value?.products ?? [])
 
-// Use API defaultLimit only if localStorage has no saved value
+// handle defaultLimit from API on first fetch
 watch(data, () => {
-  if (!savedLimit && data.value?.defaultLimit) {
-    selectedLimit.value = data.value.defaultLimit
-  }
+  if (!selectedLimitReady.value && data.value?.defaultLimit != null) {
+    const fromAPI = data.value.defaultLimit
 
-  selectedLimitReady.value = true // only after initial data received
+    // If localStorage is empty, use defaultLimit
+    if (!localLimit) {
+      selectedLimit.value = fromAPI
+      localStorage.setItem('selectedLimit', String(fromAPI))
+    } else {
+      // if localStorage has value, override the one provided by api
+      selectedLimit.value = Number(localLimit)
+    }
+
+    selectedLimitReady.value = true
+  }
 })
 
-// Re-fetch on limit change and save to localStorage
+// watch user changes after initial load
 watch(selectedLimit, (newVal) => {
   if (selectedLimitReady.value) {
     localStorage.setItem('selectedLimit', String(newVal))

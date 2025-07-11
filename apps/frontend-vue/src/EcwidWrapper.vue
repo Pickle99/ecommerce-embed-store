@@ -31,7 +31,7 @@ function initCartEnhancements() {
     const matchingProductIds: number[] = []
 
     for (const key in extraFields) {
-      // Example key: added_from_rup_product_id_123
+      // getting the id of product from extra field, to check if order still have the product id in order, or was deleted
       const match = key.match(/added_from_rup_product_id_(\d+)/)
       if (match) {
         const productId = match[1]
