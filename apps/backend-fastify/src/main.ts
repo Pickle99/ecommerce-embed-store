@@ -8,7 +8,7 @@ import path from 'path'
 import fastifyStatic from '@fastify/static'
 import compress from '@fastify/compress'
 import { appRoutes } from './routes/app.routes'
-import { fileGeneratorRoutes } from './modules/file-generators/routes'
+import { fileGeneratorRoutes } from './modules/file-generators/file-generator.routes'
 
 dotenv.config()
 
