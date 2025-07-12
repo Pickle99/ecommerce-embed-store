@@ -33,4 +33,21 @@ export class OrdersService {
       },
     })
   }
+
+  async getProductOrderCountsFromRupWidget() {
+    const records = await this.prisma.recentlyUpdatedProductsFromOrder.findMany()
+
+    const countMap: Record<number, number> = {}
+
+    for (const record of records) {
+      for (const productId of record.productId) {
+        countMap[productId] = (countMap[productId] || 0) + 1
+      }
+    }
+
+    return Object.entries(countMap).map(([productId, count]) => ({
+      productId: Number(productId),
+      count,
+    }))
+  }
 }

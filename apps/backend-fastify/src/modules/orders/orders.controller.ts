@@ -35,4 +35,17 @@ export class OrdersController {
       return reply.code(500).send({ error: 'Failed to store data' })
     }
   }
+
+  async getProductOrderCountsWhichWereAddedFromRupWidget(
+    request: FastifyRequest,
+    reply: FastifyReply
+  ) {
+    try {
+      const formatted = await this.service.getProductOrderCountsFromRupWidget()
+      return reply.send(formatted)
+    } catch (error) {
+      console.error(error)
+      return reply.code(500).send({ error: 'Failed to fetch product order counts' })
+    }
+  }
 }

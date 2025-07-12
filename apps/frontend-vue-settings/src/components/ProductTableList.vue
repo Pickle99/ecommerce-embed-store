@@ -111,12 +111,14 @@
                 <span>{{ item.name }}</span>
               </div>
               <div class="list-element__description">
-                <span class="muted">Added from RUP - {{ item.id }} times</span>
+                <span v-if="orderCounts[item.id]" class="muted"
+                  >Added to cart and ordered - {{ orderCounts[item.id] || 0 }} times
+                </span>
               </div>
             </div>
           </div>
           <div class="list-element__data-row">
-            Perfect for wearing with your favorite flat sandals or trendy sneakers.
+            {{ item.seoDescription.split('.')[0] + '.' }}
           </div>
         </div>
         <div class="list-element__actions">
@@ -128,7 +130,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useFetch } from '@vueuse/core'
+import { computed, ref } from 'vue'
 
 const props = defineProps<{
   products: {
@@ -137,8 +140,25 @@ const props = defineProps<{
     description: string
     defaultDisplayedPriceFormatted: string
     smallThumbnailUrl: string
+    seoDescription: string
   }[]
 }>()
+
+console.log(props.products, 'p[rs]')
+
+const { data: RupProductsFromOrderData } = useFetch(
+  'http://localhost:8000/api/rup-products-from-order'
+).json()
+
+const orderCounts = computed(() => {
+  if (!RupProductsFromOrderData.value) return {}
+  return Object.fromEntries(
+    RupProductsFromOrderData.value.map((item: { productId: number; count: number }) => [
+      item.productId,
+      item.count,
+    ])
+  )
+})
 
 const selectedItems = ref<number[]>([])
 

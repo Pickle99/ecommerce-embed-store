@@ -6,4 +6,8 @@ export async function ordersRoutes(fastify: FastifyInstance) {
 
   fastify.get('/orders-from-rup', controller.getOrdersFromRup.bind(controller))
   fastify.post('/ordered-from-rup', controller.postOrderedFromRup.bind(controller))
+  fastify.get(
+    '/rup-products-from-order',
+    controller.getProductOrderCountsWhichWereAddedFromRupWidget.bind(controller)
+  )
 }

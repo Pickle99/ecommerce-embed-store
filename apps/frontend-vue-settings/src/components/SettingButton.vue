@@ -94,8 +94,7 @@
 </template>
 
 <script setup lang="ts">
-import { useFetch } from '@vueuse/core'
-import { ref, computed, watch } from 'vue'
+import { ref, watch } from 'vue'
 import type { RupSettings } from '../types'
 import LockIcon from '../icons/LockIcon.vue'
 import DropdownListIcon from '../icons/DropdownListIcon.vue'
