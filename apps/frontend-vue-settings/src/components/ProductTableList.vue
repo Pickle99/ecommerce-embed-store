@@ -90,13 +90,6 @@
       class="list-element list-element--compact list-element--has-hover"
     >
       <div class="list-element__toggle">
-        <!-- <input
-          type="checkbox"
-          value="on"
-          :id="item.id.toString()"
-          tabindex="0"
-          class="list-element__toggle-checkbox"
-        /> -->
         <input
           type="checkbox"
           :value="item.id"

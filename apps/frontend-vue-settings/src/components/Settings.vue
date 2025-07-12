@@ -63,7 +63,7 @@ import ProductTableList from './ProductTableList.vue'
 import LongArrowLeftIcon from '../icons/LongArrowLeftIcon.vue'
 
 function handleRedirectToStore() {
-  window.location.href = 'http://localhost:8000'
+  window.location.replace('http://localhost:8000')
 }
 
 const { data: rupSettingsData } = useFetch('http://localhost:8000/api/rup-settings').json()
