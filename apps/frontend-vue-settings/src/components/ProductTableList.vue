@@ -1,10 +1,10 @@
 <template>
   <div class="toolbar" :style="products.length == 0 ? 'padding-bottom: 15rem' : ''">
     <button type="button" class="btn btn-default btn-medium" @click="downloadSelected('csv')">
-      Export As a CSV
+      Export Selected products (CSV)
     </button>
     <button type="button" class="btn btn-default btn-medium" @click="downloadSelected('xlsx')">
-      Export As a XLSX
+      Export Selected products (XLSX)
     </button>
   </div>
   <div class="vertical-filters__sticky-panel">
@@ -143,8 +143,6 @@ const props = defineProps<{
     seoDescription: string
   }[]
 }>()
-
-console.log(props.products, 'p[rs]')
 
 const { data: RupProductsFromOrderData } = useFetch(
   'http://localhost:8000/api/rup-products-from-order'
