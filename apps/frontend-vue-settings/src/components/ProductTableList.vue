@@ -1,7 +1,11 @@
 <template>
   <div class="toolbar" :style="products.length == 0 ? 'padding-bottom: 15rem' : ''">
-    <button type="button" class="btn btn-default btn-medium">Export As a CSV</button>
-    <button type="button" class="btn btn-default btn-medium">Export As a XLSX</button>
+    <button type="button" class="btn btn-default btn-medium" @click="downloadSelected('csv')">
+      Export As a CSV
+    </button>
+    <button type="button" class="btn btn-default btn-medium" @click="downloadSelected('xlsx')">
+      Export As a XLSX
+    </button>
   </div>
   <div class="vertical-filters__sticky-panel">
     <button type="button" class="btn btn-success btn-medium">Show Products</button>
@@ -86,9 +90,17 @@
       class="list-element list-element--compact list-element--has-hover"
     >
       <div class="list-element__toggle">
-        <input
+        <!-- <input
           type="checkbox"
           value="on"
+          :id="item.id.toString()"
+          tabindex="0"
+          class="list-element__toggle-checkbox"
+        /> -->
+        <input
+          type="checkbox"
+          :value="item.id"
+          v-model="selectedItems"
           :id="item.id.toString()"
           tabindex="0"
           class="list-element__toggle-checkbox"
@@ -123,6 +135,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
 const props = defineProps<{
   products: {
     id: number
@@ -133,5 +147,36 @@ const props = defineProps<{
   }[]
 }>()
 
-console.log(props.products, '2')
+const selectedItems = ref<number[]>([])
+
+async function downloadSelected(type: string) {
+  if (selectedItems.value.length === 0) {
+    alert('No items selected')
+    return
+  }
+
+  const response = await fetch('/api/generate-file-proxy', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ ids: selectedItems.value, fileType: type }),
+  })
+
+  if (!response.ok) {
+    console.error('Fetch failed:', await response.text())
+    return
+  }
+
+  const blob = await response.blob()
+  const url = window.URL.createObjectURL(blob)
+
+  const link = document.createElement('a')
+  link.href = url
+  link.download = `products.${type}`
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+  window.URL.revokeObjectURL(url)
+}
 </script>

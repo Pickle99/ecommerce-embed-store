@@ -20,6 +20,10 @@ apps/backend-fastify/node_modules/
 apps/frontend-vue/dist/
 apps/frontend-vue/node_modules/
 
+# Dist/output folders for frontend-settings (Vite build)
+apps/frontend-vue-settings/dist/
+apps/frontend-vue-settings/node_modules/
+
 # Logs
 *.log
 yarn-debug.log*

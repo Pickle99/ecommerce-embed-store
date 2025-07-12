@@ -1,6 +1,5 @@
 import { FastifyInstance, FastifyRequest } from 'fastify'
 import { PrismaClient } from '@prisma/client'
-import { addRUPExtraFieldToOrder } from '../services'
 
 const prisma = new PrismaClient()
 
@@ -15,10 +14,6 @@ type CountRequest = FastifyRequest<{
     recently_updated_products_visibility_count: number
   }
 }>
-
-type Params = {
-  orderId: string
-}
 
 type AddRupExtraFieldDto = {
   orderId: number
@@ -164,8 +159,6 @@ export async function appRoutes(fastify: FastifyInstance) {
           Accept: 'application/json',
         },
       })
-
-      console.log(res, 'res')
 
       if (!res.ok) {
         const errorBody = await res.text()

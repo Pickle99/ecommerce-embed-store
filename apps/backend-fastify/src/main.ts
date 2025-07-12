@@ -8,6 +8,7 @@ import path from 'path'
 import fastifyStatic from '@fastify/static'
 import compress from '@fastify/compress'
 import { appRoutes } from './routes/app.routes'
+import { fileGeneratorRoutes } from './modules/file-generators/routes'
 
 dotenv.config()
 
@@ -36,6 +37,8 @@ fastify.setNotFoundHandler((request, reply) => {
 })
 
 fastify.register(appRoutes)
+
+fastify.register(fileGeneratorRoutes, { prefix: '/api' })
 
 fastify.get('/time', async () => {
   const nowResult = await prisma.$queryRaw<{ now: Date }[]>`SELECT NOW() as now`
