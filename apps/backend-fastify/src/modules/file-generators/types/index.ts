@@ -1,4 +1,4 @@
-export interface GenerateFileRequestDto {
+export type GenerateFileRequestType = {
   ids: number[]
   fileType: 'csv' | 'xlsx'
 }

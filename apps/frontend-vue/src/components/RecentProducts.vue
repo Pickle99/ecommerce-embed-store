@@ -63,7 +63,7 @@ const limitOptions = Array.from({ length: 10 }, (_, i) => i + 1)
 
 // Computed fetch URL
 const url = computed(
-  () => `http://localhost:8000/recently-updated-products?limit=${selectedLimit.value}`
+  () => `http://localhost:8000/api/recently-updated-products?limit=${selectedLimit.value}`
 )
 
 const { data, error, isFetching, execute } = useFetch(url, { immediate: true }).get().json()

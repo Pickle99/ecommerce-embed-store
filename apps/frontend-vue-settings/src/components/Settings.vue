@@ -66,10 +66,10 @@ function handleRedirectToStore() {
   window.location.href = 'http://localhost:8000'
 }
 
-const { data: rupSettingsData } = useFetch('http://localhost:8000/rup-settings').json()
+const { data: rupSettingsData } = useFetch('http://localhost:8000/api/rup-settings').json()
 
 const { data: rupProductsData } = useFetch(
-  'http://localhost:8000/recently-updated-products?limit=10' // we have limit query, max 10, so just write limit=10 to see all
+  'http://localhost:8000/api/recently-updated-products?limit=10' // we have limit query, max 10, so just write limit=10 to see all
 ).json()
 
 const products = computed(() => rupProductsData.value?.products ?? [])
@@ -78,7 +78,7 @@ const settings = computed(() => rupSettingsData.value?.settings ?? [])
 
 async function updateWidgetVisibility(newValue: boolean) {
   try {
-    const response = await fetch('http://localhost:8000/rup-toggle', {
+    const response = await fetch('http://localhost:8000/api/rup-toggle', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

@@ -132,7 +132,7 @@ watch(numberValue, (val) => {
 
 async function updateRupCount() {
   try {
-    const response = await fetch('http://localhost:8000/rup-count', {
+    const response = await fetch('http://localhost:8000/api/rup-count', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

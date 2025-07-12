@@ -1,10 +1,10 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { FileGeneratorService } from './file-generator.service'
-import { GenerateFileRequestDto } from './dto/generate-file-request.dto'
+import { GenerateFileRequestType } from './types'
 
 export class FileGeneratorController {
   async handleGenerateFile(request: FastifyRequest, reply: FastifyReply) {
-    const { ids, fileType } = request.body as GenerateFileRequestDto
+    const { ids, fileType } = request.body as GenerateFileRequestType
 
     if (!ids || !Array.isArray(ids) || !fileType) {
       return reply.status(400).send({ error: 'Invalid payload' })

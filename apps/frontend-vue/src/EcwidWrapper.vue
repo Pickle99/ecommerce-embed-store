@@ -41,7 +41,7 @@ function initCartEnhancements() {
       }
     }
 
-    fetch(`http://localhost:8000/ordered-from-rup`, {
+    fetch(`http://localhost:8000/api/ordered-from-rup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
