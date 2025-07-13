@@ -101,6 +101,30 @@ You need this ports to be available:
 
 3. :3333 (for frontend-settings)
 
+## Tech Stack
+
+Vue 3 (compositions api)
+
+Ecwid Storefront / Ecwid rest api / Ecwid CSS Framework
+
+NodeJS with Fastify framework
+
+PostgreSQL Database
+
+TypeScript
+
+Yarn (version 4+)
+
+Docker
+
+Node (tested on 22 version)
+
+## Note
+
+All of the files was created manually by hand, there was no Vue-Cli or fastify-cli or whatever
+
+Started from package.json and ts.config, ended with vite configs and components and etc.
+
 ### Q & A
 
 Possible questions and answers:
