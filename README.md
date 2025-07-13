@@ -106,7 +106,7 @@ Possible questions and answers:
 
 2. Why i have frontend-vue and frontend-vue-settings ?
 
-**Answer: Frontend vue serves as a Ecommerce Script (ecwid), which is built and hosted on Fastify-server. Frontend-vue-settings servers for separate settings page, which uses ecwid css framework for styling.**
+   **Answer: Frontend vue serves as a Ecommerce Script (ecwid), which is built and hosted on Fastify-server. Frontend-vue-settings servers for separate settings page, which uses ecwid css framework for styling.**
 
 3. Why i use :8000 port for backend, and :3333 port for frontend-vue-settings ?
 
