@@ -37,7 +37,7 @@ On the app itself we can:
 
 DATABASE_URL="postgresql://postgres:231289@postgres/EcwidPostgresDB"
 
-##### ^ you can just copy-paste it if you want to run from docker, if not change it accordingly for local
+^ you can just copy-paste it if you want to run from docker, if not change it accordingly for local
 
 ECWID_STORE_ID=<YOUR_STORE_ID>
 
