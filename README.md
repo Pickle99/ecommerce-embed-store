@@ -35,7 +35,9 @@ On the app itself we can:
 
 # Create .env file in backend-fastify folder
 
-DATABASE_URL="postgresql://postgres:<YOUR_PASSWORD>@postgres/EcwidPostgresDB"
+DATABASE_URL="postgresql://postgres:231289@postgres/EcwidPostgresDB"
+
+##### ^ you can just copy-paste it if you want to run from docker, if not change it accordingly for local
 
 ECWID_STORE_ID=<YOUR_STORE_ID>
 
