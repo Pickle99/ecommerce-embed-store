@@ -76,15 +76,15 @@ Now we are good to go !
 
 ! Notice that right now app is working only from localhost, and not from 127.0.0.1 or whatever (because i have not configured .env for url-s and have not made proper tunneling since its a test task i have not deeped dived in all of the possible things)
 
-# Run from docker with a single command (Right now works in a production-like mode "but halfly, i would say")
+## Run from docker with a single command (Right now works in a production-like mode "but halfly, i would say")
 
 Please note that first of all you need docker to be configured on your machine, as well as docker compose
 
-if you are running from docker, attach the DATABASE_URL in .env like this:
+if you are running from docker, attach the DATABASE_URL in .env like this (do not forgot other .env variables which i described above):
 
 `DATABASE_URL="postgresql://postgres:231289@postgres/EcwidPostgresDB"`
 
-`docker compose up --build`
+then run `docker compose up --build`
 
 You need this ports to be available:
 
