@@ -165,7 +165,7 @@ Possible questions and answers:
 
 10. Do i have any ideas how this project could be written in another way? Instead of frontend-vue-settings ?
 
-    **Answer: Yes, at the end i thought of generating the iframe with Ecwid on "/" page, and another component for settings on "/settings" page, however i am not sure if it will work, there could be so many workarounds which must be tested 1 by 1 to see what is the downside, so i just sticked to this desigion, because the most correct way probably known by LightSpeed/Ecwid team**
+    **Answer: Yes, at the end i thought of generating the iframe with Ecwid on "/" page, and another component for settings on "/settings" page, however i am not sure if it will work, there could be so many workarounds which must be tested 1 by 1 to see what is the downside, so i just sticked to this decision, because the most correct way probably known by LightSpeed/Ecwid team**
 
 ## Note
 
