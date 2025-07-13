@@ -159,6 +159,14 @@ Possible questions and answers:
 
    **Answer: Because it is more secure to be in the backend. Yes, we can setup proxy in frontend and do this from there, however i usually use backend if i have any secret keys or some environmental variables, since in frontend we can easily see them from network.**
 
+9. Why do i use nginx ?
+
+   **Answer: I had to use nginx, so we can download csv or xlsx files when we are not on devServer (streaming)**
+
+10. Do i have any ideas how this project could be written in another way? Instead of frontend-vue-settings ?
+
+    **Answer: Yes, at the end i thought of generating the iframe with Ecwid on "/" page, and another component for settings on "/settings" page, however i am not sure if it will work, there could be so many workarounds which must be tested 1 by 1 to see what is the downside, so i just sticked to this desigion, because the most correct way probably known by LightSpeed/Ecwid team**
+
 ## Note
 
 All of the files were created manually by hand, there was no Vue-Cli or fastify-cli or whatever
