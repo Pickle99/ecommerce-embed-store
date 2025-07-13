@@ -32,7 +32,7 @@ export class RupService {
     })
   }
 
-  async fetchRecentlyUpdatedProducts(storeId: string, apiKey: string) {
+  async fetchProducts(storeId: string, apiKey: string) {
     const res = await fetch(`https://app.ecwid.com/api/v3/${storeId}/products`, {
       method: 'GET',
       headers: {

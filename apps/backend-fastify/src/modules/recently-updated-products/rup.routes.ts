@@ -8,4 +8,6 @@ export async function rupRoutes(fastify: FastifyInstance) {
   fastify.put('/rup-toggle', controller.updateToggle.bind(controller))
   fastify.put('/rup-count', controller.updateCount.bind(controller))
   fastify.get('/recently-updated-products', controller.getRecentlyUpdatedProducts.bind(controller))
+
+  fastify.get('/products', controller.getProducts.bind(controller))
 }

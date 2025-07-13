@@ -59,7 +59,7 @@ export class RupController {
         return reply.send({ products: [] })
       }
 
-      const items = await this.service.fetchRecentlyUpdatedProducts(storeId, apiKey)
+      const items = await this.service.fetchProducts(storeId, apiKey)
 
       const limit = request.query.limit ? parseInt(request.query.limit, 10) : undefined
       if (limit !== undefined && (isNaN(limit) || limit <= 0)) {
@@ -78,6 +78,26 @@ export class RupController {
       })
     } catch (err) {
       console.error('Error fetching RUP products:', err)
+      return reply.code(500).send({ error: 'Unexpected server error' })
+    }
+  }
+
+  async getProducts(_: FastifyRequest, reply: FastifyReply) {
+    try {
+      const storeId = process.env.ECWID_STORE_ID
+      const apiKey = process.env.ECWID_TOKEN
+
+      if (!storeId || !apiKey) {
+        return reply.code(500).send({ error: 'Missing Ecwid API credentials' })
+      }
+
+      const products = await this.service.fetchProducts(storeId, apiKey)
+
+      return reply.send({
+        products,
+      })
+    } catch (err) {
+      console.error('Error fetching products:', err)
       return reply.code(500).send({ error: 'Unexpected server error' })
     }
   }

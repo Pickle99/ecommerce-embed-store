@@ -68,11 +68,9 @@ function handleRedirectToStore() {
 
 const { data: rupSettingsData } = useFetch('http://localhost:8000/api/rup-settings').json()
 
-const { data: rupProductsData } = useFetch(
-  'http://localhost:8000/api/recently-updated-products?limit=10' // we have limit query, max 10, so just write limit=10 to see all
-).json()
+const { data: productsData } = useFetch('http://localhost:8000/api/products').json()
 
-const products = computed(() => rupProductsData.value?.products ?? [])
+const products = computed(() => productsData.value?.products ?? [])
 
 const settings = computed(() => rupSettingsData.value?.settings ?? [])
 
