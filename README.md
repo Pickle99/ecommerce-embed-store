@@ -66,12 +66,17 @@ First of all, from root directory run `yarn install`, then:
 1. run `yarn build` from apps/frontend-vue
 
 2. navigate to apps/backend-fastify and run Step-By-Step (dont forgot that you need .env file and configured Postgres with user, database and etc.)
+
    `yarn generate`
+
    `yarn prisma migrate dev --name init` (just in case)
+
    `yarn generate-settings` - to seed the database with default settings of store widget
+
    `yarn dev`
 
 3. navigate to apps/frontend-vue-settings and run
+
    `yarn dev`
 
 Now we are good to go !
