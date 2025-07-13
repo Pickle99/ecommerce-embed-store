@@ -2,7 +2,6 @@ import Fastify from 'fastify'
 import dotenv from 'dotenv'
 import chalk from 'chalk'
 import cors from '@fastify/cors'
-import { fileURLToPath } from 'url'
 import path from 'path'
 import fastifyStatic from '@fastify/static'
 import compress from '@fastify/compress'
@@ -13,8 +12,6 @@ import { rupRoutes } from './modules/recently-updated-products/rup.routes'
 dotenv.config()
 
 const fastify = Fastify({ logger: false })
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 fastify.register(cors, {
   origin: ['http://localhost:3000', 'http://localhost:3333'],
@@ -25,7 +22,7 @@ fastify.register(cors, {
 fastify.register(compress)
 
 fastify.register(fastifyStatic, {
-  root: path.join(__dirname, '../../frontend-vue/dist'),
+  root: path.resolve(__dirname, '../../frontend-vue/dist'),
   prefix: '/',
   cacheControl: true,
   maxAge: '10d',
@@ -43,8 +40,13 @@ fastify.register(rupRoutes, { prefix: '/api' })
 
 const start = async () => {
   try {
-    await fastify.listen({ port: 8000 })
-    console.log(chalk.green.bold('Server listening on http://localhost:8000 🚀'))
+    fastify.listen({ port: 8000, host: '0.0.0.0' }, (err, address) => {
+      if (err) {
+        console.error(err)
+        process.exit(1)
+      }
+      console.log(`Server listening on ${address} 🚀`)
+    })
   } catch (err) {
     console.error(chalk.red('Error starting server:'), err)
     process.exit(1)
