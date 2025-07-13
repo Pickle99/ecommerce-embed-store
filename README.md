@@ -37,7 +37,7 @@ On the app itself we can:
 
 DATABASE_URL="postgresql://postgres:231289@postgres/EcwidPostgresDB"
 
-you can just copy-paste it if you want to run from docker, if not change it accordingly for local
+you can just copy-paste it (DATABASE_URL) if you want to run from docker, if not change it accordingly for local
 
 ECWID_STORE_ID=<YOUR_STORE_ID>
 
@@ -95,3 +95,29 @@ You need this ports to be available:
 2. :8000 (for backend)
 
 3. :3333 (for frontend-settings)
+
+### Q & A
+
+Possible questions and answers:
+
+1. Why i dont use vue-router to render ecwid app on / route and settings page (component or whatever) on /settings route. ?
+   Answer: because there was a problems with it, initially it was working, but when i was navigating to cart and then back to user profile or whatever another page, ecwid script was going to infinity loop. Also i dont had the control over ecwid app, from where (i think) it is possible to create empty page directly, and after which edit is the way we want (it is just my guess, or maybe there is another cleaner way i dont know about)
+
+2. Why i have frontend-vue and frontend-vue-settings ?
+
+Answer: Frontend vue serves as a Ecommerce Script (ecwid), which is built and hosted on Fastify-server. Frontend-vue-settings servers for separate settings page, which uses ecwid css framework for styling.
+
+3. Why i use :8000 port for backend, and :3333 port for frontend-vue-settings ?
+   Answer: because usually :8000 port servers for backends, and :3333 is just a port, usually frontend have to serve on :3000, but i made it to work from :3333, because why not ?
+
+4. Why i have not made .env for frontends, like BACKEND_URL or something ?
+   Answer: because it is just a test task for now, so i have not deep-dived into it, kept it on localhost, think it is fine even like this, not very important right now.
+
+5. Why i dont use absolute paths (@) ?
+   Answer: Yes, i know that it is better to use @ paths, however i just kept it like this, since for very small project i think it is pretty fine.
+
+6. Why there is no clear project structure for frontends (both) ?
+   Answer: Yes, i have not made big separation between stuff like inputs, pages, api and etc, since for very small project it would be overkill to create a clean project structure, so i just kept it like that, and concentrated on backend project structure, because there was more stuff.
+
+7. Why do i add extra fields to order, but then use Postgres to save orderId and product ids that were ordered, when i just can get order and see its orderExtraFields manually from ecwid Rest API ?
+   Answer: i was unable to reach it (some limitations or whatever), so i had to imagine some workaround
