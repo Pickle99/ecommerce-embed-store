@@ -119,12 +119,6 @@ Docker
 
 Node (tested on 22 version)
 
-## Note
-
-All of the files was created manually by hand, there was no Vue-Cli or fastify-cli or whatever
-
-Started from package.json and ts.config, ended with vite configs and components and etc.
-
 ### Q & A
 
 Possible questions and answers:
@@ -156,3 +150,9 @@ Possible questions and answers:
 7. Why do i add extra fields to order, but then use Postgres to save orderId and product ids that were ordered, when i just can get order and see its orderExtraFields manually from ecwid Rest API ?
 
    **Answer: i was unable to reach it (some limitations or whatever), so i had to imagine some workaround**
+
+## Note
+
+All of the files were created manually by hand, there was no Vue-Cli or fastify-cli or whatever
+
+Started from package.json and ts.config, ended with vite configs and components and etc.
