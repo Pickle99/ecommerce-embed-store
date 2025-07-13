@@ -79,7 +79,9 @@ First of all, from root directory run `yarn install`, then:
 
 3. navigate to apps/frontend-vue-settings and run
 
-   `yarn dev`
+   `yarn dev-settings`
+
+   or do it with build (check package.json scripts)
 
 Now we are good to go !
 
