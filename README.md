@@ -59,6 +59,8 @@ Or Build and then run
 
 `yarn start`
 
+### Do not forgot to configure prettier locally, for VSC you will need settings.json
+
 # How to start the project Locally (without docker)
 
 First of all, from root directory run `yarn install`, then:
