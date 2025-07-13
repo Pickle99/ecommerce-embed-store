@@ -108,16 +108,21 @@ Possible questions and answers:
 Answer: Frontend vue serves as a Ecommerce Script (ecwid), which is built and hosted on Fastify-server. Frontend-vue-settings servers for separate settings page, which uses ecwid css framework for styling.
 
 3. Why i use :8000 port for backend, and :3333 port for frontend-vue-settings ?
+
    Answer: because usually :8000 port servers for backends, and :3333 is just a port, usually frontend have to serve on :3000, but i made it to work from :3333, because why not ?
 
 4. Why i have not made .env for frontends, like BACKEND_URL or something ?
+
    Answer: because it is just a test task for now, so i have not deep-dived into it, kept it on localhost, think it is fine even like this, not very important right now.
 
 5. Why i dont use absolute paths (@) ?
+
    Answer: Yes, i know that it is better to use @ paths, however i just kept it like this, since for very small project i think it is pretty fine.
 
 6. Why there is no clear project structure for frontends (both) ?
+
    Answer: Yes, i have not made big separation between stuff like inputs, pages, api and etc, since for very small project it would be overkill to create a clean project structure, so i just kept it like that, and concentrated on backend project structure, because there was more stuff.
 
 7. Why do i add extra fields to order, but then use Postgres to save orderId and product ids that were ordered, when i just can get order and see its orderExtraFields manually from ecwid Rest API ?
+
    Answer: i was unable to reach it (some limitations or whatever), so i had to imagine some workaround
