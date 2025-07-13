@@ -7,7 +7,7 @@ The app works from Yarn (version 4+)
 
 There is 3 apps:
 
-####[red] Notice that right now app is working only from localhost, and not from 127.0.0.1 or whatever (because i have not configured .env for url-s and have not made proper tunneling since its a test task i have not deeped dived in all of the possible things)
+#### Notice that right now app is working only from localhost (localhost:8000 , localhost:3333), and not from 127.0.0.1 or whatever (because i have not configured .env for url-s and have not made proper tunneling since its a test task i have not deeped dived in all of the possible things)
 
 1. frontend-vue which is builded and then used inside fastify
 
