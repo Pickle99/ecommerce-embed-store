@@ -167,6 +167,7 @@ async function downloadSelected(type: string) {
   }
 
   const response = await fetch('/api/generate-file-proxy', {
+    // we are using proxy here, check vite.config.ts
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

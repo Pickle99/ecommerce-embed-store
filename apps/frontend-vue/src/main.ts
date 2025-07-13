@@ -105,7 +105,7 @@ function initCartEnhancements() {
         const newA = document.createElement('a')
         newA.className =
           'ec-footer__link ec-link ec-link--muted link--icon-top footer__link--shopping-cart'
-        newA.href = 'http://localhost:3333/settings'
+        newA.href = 'http://localhost:3333'
 
         const newSpan = document.createElement('span')
         newSpan.className = 'svg-icon'

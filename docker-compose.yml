@@ -50,11 +50,21 @@ services:
     build:
       context: .
       dockerfile: apps/frontend-vue-settings/Dockerfile
-    image: frontend-vue-settings-dev
+    image: frontend-vue-settings-prod
+    depends_on:
+      - backend
+    expose:
+      - 80
+
+  nginx:
+    build:
+      context: .
+      dockerfile: apps/nginx/Dockerfile
     ports:
-      - '3333:3333'
-    working_dir: /app/apps/frontend-vue-settings
-    command: ['yarn', 'preview', '--port', '3333', '--host', '0.0.0.0']
+      - '3333:80'
+    depends_on:
+      - frontend-vue-settings
+      - backend
 
 volumes:
   postgres-data:
