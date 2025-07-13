@@ -155,6 +155,10 @@ Possible questions and answers:
 
    **Answer: i was unable to reach it (some limitations or whatever), so i had to imagine some workaround**
 
+8. Why do i use Backend to send fetch requests to Ecwid Rest API, and not frontend ?
+
+   **Answer: Because it is more secure to be in the backend. Yes, we can setup proxy in frontend and do this from there, however i usually use backend if i have any secret keys or some environmental variables, since in frontend we can easily see them from network.**
+
 ## Note
 
 All of the files were created manually by hand, there was no Vue-Cli or fastify-cli or whatever
