@@ -161,11 +161,7 @@ Possible questions and answers:
 
 9. Why do i use nginx ?
 
-   **Answer: I had to use nginx, so we can download csv or xlsx files when we are not on devServer (streaming)**
-
-10. Do i have any ideas how this project could be written in another way? Instead of frontend-vue-settings ?
-
-    **Answer: Yes, at the end i thought of generating the iframe with Ecwid on "/" page, and another component for settings on "/settings" page, however i am not sure if it will work, there could be so many workarounds which must be tested 1 by 1 to see what is the downside, so i just sticked to this decision, because the most correct way probably known by LightSpeed/Ecwid team**
+   **Answer: I had to use nginx, so we can download csv or xlsx files when we are not on devServer (streaming)** 
 
 ## Note
 
