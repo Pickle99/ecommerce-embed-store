@@ -43,6 +43,8 @@ ECWID_STORE_ID=<YOUR_STORE_ID>
 
 ECWID_TOKEN=<YOUR_ECWID_PUBLIC_TOKEN>
 
+P.S do not include < > it is just a placeholder
+
 # Back-end commands
 
 `yarn prisma generate`
