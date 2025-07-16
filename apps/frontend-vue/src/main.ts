@@ -1,5 +1,6 @@
 import { createApp, nextTick } from 'vue'
 import RecentProducts from './components/RecentProducts.vue'
+import Landing from './components/Landing.vue'
 
 type OrderItemType = {
   product: {
@@ -57,72 +58,107 @@ function initCartEnhancements() {
   })
 
   // @ts-ignore
+  Ecwid.OnAPILoaded.add(function () {
+    // @ts-ignore
+    Ecwid.OnPageLoaded.add((page: any) => {
+      //@ts-ignore
+      const existingWidgets = document.querySelectorAll('.landing-widget')
+      existingWidgets.forEach((el) => el.remove())
 
-  Ecwid.OnPageLoaded.add((page: any) => {
-    if (page.type === 'CART') {
-      const cartWrapper = document.querySelector('.ec-store__content-wrapper') as HTMLElement
-      if (!cartWrapper) return
+      if (page.type === 'CATEGORY') {
+        const storefrontEl = document.querySelector(
+          '.ecwid-productBrowser-CategoryPage'
+        ) as HTMLElement
+        if (!storefrontEl) return
 
-      const existingWidgets = cartWrapper.querySelectorAll('.widget')
-      existingWidgets.forEach((w) => w.remove())
+        const landingContainer = document.createElement('div')
+        landingContainer.className = 'landing-widget'
+        storefrontEl.parentElement?.insertBefore(landingContainer, storefrontEl)
 
-      const existingSettingsLinks = document.querySelectorAll('a[href="#/settings"]')
-      existingSettingsLinks.forEach((link) => link.parentElement?.remove())
+        const shadow = landingContainer.attachShadow({ mode: 'open' })
 
-      cartWrapper.style.display = 'flex'
-      cartWrapper.style.flexDirection = 'column'
+        const vueRoot = document.createElement('div')
+        vueRoot.setAttribute('class', 'widget_container')
 
-      const widgetContainer = document.createElement('div')
-      widgetContainer.setAttribute('class', 'widget')
-      widgetContainer.style.order = '2'
-      cartWrapper.appendChild(widgetContainer)
+        const stylesheet = document.createElement('link')
+        stylesheet.setAttribute(
+          'href',
+          'https://d35z3p2poghz10.cloudfront.net/ecwid-sdk/css/1.3.18/ecwid-app-ui.css'
+        )
+        stylesheet.setAttribute('rel', 'stylesheet')
 
-      const shadow = widgetContainer.attachShadow({ mode: 'open' })
-      const vueRoot = document.createElement('div')
-      vueRoot.setAttribute('class', 'widget_container')
+        shadow.appendChild(stylesheet)
+        shadow.appendChild(vueRoot)
 
-      const stylesheet = document.createElement('link')
-      stylesheet.setAttribute(
-        'href',
-        'https://d35z3p2poghz10.cloudfront.net/ecwid-sdk/css/1.3.18/ecwid-app-ui.css'
-      )
-      stylesheet.setAttribute('rel', 'stylesheet')
+        const vueApp = createApp(Landing)
+        vueApp.mount(vueRoot)
+      }
 
-      shadow.appendChild(stylesheet)
-      shadow.appendChild(vueRoot)
+      if (page.type === 'CART') {
+        const cartWrapper = document.querySelector('.ec-store__content-wrapper') as HTMLElement
+        if (!cartWrapper) return
 
-      const vueApp = createApp(RecentProducts)
-      vueApp.mount(vueRoot)
+        const existingWidgets = cartWrapper.querySelectorAll('.widget')
+        existingWidgets.forEach((w) => w.remove())
 
-      const ecwidFooter = document.querySelector('.ec-footer') as HTMLElement
-      if (ecwidFooter) ecwidFooter.style.order = '3'
+        const existingSettingsLinks = document.querySelectorAll('a[href="#/settings"]')
+        existingSettingsLinks.forEach((link) => link.parentElement?.remove())
 
-      const footerRow = document.querySelector('.ec-footer__row') as HTMLElement
-      if (footerRow && !footerRow.querySelector('a[href="#/settings"]')) {
-        const newLi = document.createElement('li')
-        newLi.className = 'ec-footer__cell __web-inspector-hide-shortcut__'
+        cartWrapper.style.display = 'flex'
+        cartWrapper.style.flexDirection = 'column'
 
-        const newA = document.createElement('a')
-        newA.className =
-          'ec-footer__link ec-link ec-link--muted link--icon-top footer__link--shopping-cart'
-        newA.href = 'http://localhost:3333'
+        const widgetContainer = document.createElement('div')
+        widgetContainer.setAttribute('class', 'widget')
+        widgetContainer.style.order = '2'
+        cartWrapper.appendChild(widgetContainer)
 
-        const newSpan = document.createElement('span')
-        newSpan.className = 'svg-icon'
-        newSpan.innerHTML = `
+        const shadow = widgetContainer.attachShadow({ mode: 'open' })
+        const vueRoot = document.createElement('div')
+        vueRoot.setAttribute('class', 'widget_container')
+
+        const stylesheet = document.createElement('link')
+        stylesheet.setAttribute(
+          'href',
+          'https://d35z3p2poghz10.cloudfront.net/ecwid-sdk/css/1.3.18/ecwid-app-ui.css'
+        )
+        stylesheet.setAttribute('rel', 'stylesheet')
+
+        shadow.appendChild(stylesheet)
+        shadow.appendChild(vueRoot)
+
+        const vueApp = createApp(RecentProducts)
+        vueApp.mount(vueRoot)
+
+        const ecwidFooter = document.querySelector('.ec-footer') as HTMLElement
+        if (ecwidFooter) ecwidFooter.style.order = '3'
+
+        const footerRow = document.querySelector('.ec-footer__row') as HTMLElement
+        if (footerRow && !footerRow.querySelector('a[href="#/settings"]')) {
+          const newLi = document.createElement('li')
+          newLi.className = 'ec-footer__cell __web-inspector-hide-shortcut__'
+
+          const newA = document.createElement('a')
+          newA.className =
+            'ec-footer__link ec-link ec-link--muted link--icon-top footer__link--shopping-cart'
+          newA.href = 'http://localhost:3333'
+
+          const newSpan = document.createElement('span')
+          newSpan.className = 'svg-icon'
+          newSpan.innerHTML = `
 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
   <circle class="st0" cx="16" cy="9" r="2"/>
   <circle class="st0" cx="9" cy="9" r="2"/>
   <circle class="st0" cx="2" cy="9" r="2"/>
 </svg>`
 
-        newA.appendChild(newSpan)
-        newA.appendChild(document.createTextNode('Settings'))
+          newA.appendChild(newSpan)
+          newA.appendChild(document.createTextNode('Settings'))
 
-        newLi.appendChild(newA)
-        footerRow.appendChild(newLi)
+          newLi.appendChild(newA)
+          footerRow.appendChild(newLi)
+        }
       }
-    }
+    })
   })
 }
 
