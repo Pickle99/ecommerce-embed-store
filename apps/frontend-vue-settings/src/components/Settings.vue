@@ -52,7 +52,10 @@
         <div class="named-area__header">
           <div class="named-area__titles">
             <div class="named-area__title">Products catalog list</div>
-            <div class="named-area__subtitle">You can see and export your products from here.</div>
+            <div class="named-area__subtitle">
+              You can see and export your products from here. Inside exported files, you can also
+              see how many times your product from RUP section were ordered.
+            </div>
           </div>
         </div>
         <div class="named-area__body" v-if="products.length">
