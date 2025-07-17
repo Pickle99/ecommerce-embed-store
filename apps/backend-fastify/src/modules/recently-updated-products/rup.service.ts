@@ -33,13 +33,16 @@ export class RupService {
   }
 
   async fetchProducts(storeId: string, apiKey: string) {
-    const res = await fetch(`https://app.ecwid.com/api/v3/${storeId}/products`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        Accept: 'application/json',
-      },
-    })
+    const res = await fetch(
+      `https://app.ecwid.com/api/v3/${storeId}/products?sortBy=UPDATED_TIME_DESC`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          Accept: 'application/json',
+        },
+      }
+    )
 
     if (!res.ok) {
       const errorBody = await res.text()

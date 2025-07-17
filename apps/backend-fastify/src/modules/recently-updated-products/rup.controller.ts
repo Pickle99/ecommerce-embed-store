@@ -59,7 +59,7 @@ export class RupController {
         return reply.send({ products: [] })
       }
 
-      const items = await this.service.fetchProducts(storeId, apiKey)
+      const products = await this.service.fetchProducts(storeId, apiKey)
 
       const limit = request.query.limit ? parseInt(request.query.limit, 10) : undefined
       if (limit !== undefined && (isNaN(limit) || limit <= 0)) {
@@ -68,12 +68,8 @@ export class RupController {
 
       const count = limit ?? settings.recently_updated_products_visibility_count ?? 3
 
-      const sorted = items
-        .sort((a: any, b: any) => b.updateTimestamp - a.updateTimestamp)
-        .slice(0, count)
-
       return reply.send({
-        products: sorted,
+        products: products.slice(0, count),
         defaultLimit: settings.recently_updated_products_visibility_count ?? 3,
       })
     } catch (err) {
