@@ -1,12 +1,8 @@
 <template>
-  <div class="catalog">
+  <div v-if="products.length > 0" class="catalog">
     <div class="advised_products">
       <h2 style="text-align: center">Recently Updated Products</h2>
-      <div
-        class="form-area"
-        style="display: flex; justify-content: flex-end; margin: 1rem 0"
-        v-if="products.length > 0"
-      >
+      <div class="form-area" style="display: flex; justify-content: flex-end; margin: 1rem 0">
         <div class="form-area__content">
           <div class="fieldsets-batch fieldsets-batch--with-single-field">
             <div style="width: 4rem" class="fieldset fieldset--select fieldset--no-label">
@@ -32,6 +28,7 @@
       <div v-else-if="error">{{ error.message }}</div>
       <div v-else-if="products.length === 0">No products found.</div>
       <div
+        v-else
         :style="{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
