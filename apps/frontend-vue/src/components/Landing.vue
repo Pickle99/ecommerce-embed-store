@@ -11,11 +11,12 @@
             colors, and text to suit your needs effortlessly. <br />
             <b>P.S i don't know what to write here, however you can click on Shop now.</b>
           </p>
-          <a href="#" :style="buttonStyle">Shop Now</a>
+          <a href="#" :style="buttonStyle" @click.prevent="scrollToProducts">Shop Now</a>
         </div>
       </div>
     </div>
-    <h1 style="text-align: center; margin-top: 2rem">Products</h1>
+    <div ref="productsAnchor" style="height: 2rem"></div>
+    <h1 style="text-align: center">Products</h1>
   </div>
 </template>
 
@@ -33,6 +34,14 @@ onMounted(() => {
   updateLayout()
   window.addEventListener('resize', updateLayout)
 })
+
+const productsAnchor = ref<HTMLElement | null>(null)
+
+const scrollToProducts = () => {
+  if (productsAnchor.value) {
+    productsAnchor.value.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
 
 const fixedBlockHeight = '50vh'
 
@@ -97,5 +106,6 @@ const buttonStyle: CSSProperties = {
   textDecoration: 'none',
   fontSize: '0.9rem',
   fontWeight: '500',
+  cursor: 'pointer',
 }
 </script>
