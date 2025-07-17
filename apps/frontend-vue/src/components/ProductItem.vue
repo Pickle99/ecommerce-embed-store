@@ -125,9 +125,8 @@ function addToCart(productId: number) {
     title: title,
     type: 'empty',
     productId,
+    orderDetailsDisplaySection: 'order_comments',
   }
-  // @ts-ignore
-  Ecwid.refreshConfig && Ecwid.refreshConfig()
 
   // @ts-ignore
   Ecwid.Cart.addProduct(productId)

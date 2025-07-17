@@ -19,6 +19,40 @@ type OrderItemType = {
 }
 
 function initCartEnhancements() {
+  //@ts-ignore
+  Ecwid.OnCartChanged.add((cart) => {
+    console.log('🛒 Cart changed:', cart.items)
+
+    // Get all product IDs from cart items
+    const cartProductIds = cart.items.map((item: any) => item.product?.id).filter(Boolean)
+
+    console.log(cartProductIds, 'ids')
+
+    // @ts-ignore
+    const order = window.ec?.order
+    if (!order?.extraFields || typeof order.extraFields !== 'object') {
+      return
+    }
+
+    // Clean up RUP-specific extraFields if their products are no longer in the cart
+    Object.keys(order.extraFields).forEach((key) => {
+      const rupMatch = key.match(/^added_from_rup_product_id_(\d+)$/)
+      if (!rupMatch) {
+        return
+      }
+
+      const rupProductId = parseInt(rupMatch[1], 10)
+      if (!cartProductIds.includes(rupProductId)) {
+        console.log(`❌ Product ID ${rupProductId} not in cart, removing extraField: ${key}`)
+        delete order.extraFields[key]
+      } else {
+        console.log(`✅ Product ID ${rupProductId} still in cart, keeping extraField: ${key}`)
+      }
+    })
+    //@ts-ignore
+    Ecwid.refreshConfig()
+  })
+
   // @ts-ignore
   Ecwid.OnOrderPlaced.add((order) => {
     const itemsProductIds = order.items.map((item: OrderItemType) => item.product.id)
