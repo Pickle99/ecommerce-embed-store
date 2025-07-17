@@ -48,14 +48,14 @@
           />
         </div>
       </div>
-      <div class="named-area">
+      <div class="named-area" style="padding-bottom: 15rem">
         <div class="named-area__header">
           <div class="named-area__titles">
             <div class="named-area__title">Products catalog list</div>
             <div class="named-area__subtitle">You can see and export your products from here.</div>
           </div>
         </div>
-        <div class="named-area__body">
+        <div class="named-area__body" v-if="products.length">
           <ProductTableList :products="products" />
         </div>
       </div>

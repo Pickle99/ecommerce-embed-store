@@ -1,5 +1,5 @@
 <template>
-  <div class="toolbar" :style="products.length == 0 ? 'padding-bottom: 15rem' : ''">
+  <div class="toolbar">
     <button type="button" class="btn btn-default btn-medium" @click="downloadSelected('csv')">
       Export Selected products (CSV)
     </button>
@@ -47,7 +47,7 @@
             </div>
           </div>
           <div class="list-element__data-row">
-            {{ item.seoDescription.split('.')[0] + '.' }}
+            {{ getFirstSentence(item.seoDescription) }}
           </div>
         </div>
         <div class="list-element__actions">
@@ -56,11 +56,18 @@
       </div>
     </div>
   </div>
+
+  <div v-else-if="products.length < 1" class="filtered-list__items long-list">
+    <div class="list-element list-element--compact list-element--has-hover">
+      <p>No Products found. Check if products exist, first of all.</p>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { useFetch } from '@vueuse/core'
 import { computed, ref } from 'vue'
+import { getFirstSentence } from '../helpers'
 
 const props = defineProps<{
   products: {
