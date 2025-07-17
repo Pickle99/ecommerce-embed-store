@@ -76,11 +76,6 @@
                 <div class="list-element__title">
                   <span>{{ item.name }}</span>
                 </div>
-                <div class="list-element__description">
-                  <span v-if="orderCounts[item.id]" class="muted"
-                    >Added to cart and ordered - {{ orderCounts[item.id] || 0 }} times
-                  </span>
-                </div>
               </div>
             </div>
             <div class="list-element__data-row">
@@ -108,8 +103,7 @@
 </template>
 
 <script setup lang="ts">
-import { useFetch } from '@vueuse/core'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { getFirstSentence } from '../helpers'
 import Pagination from './UI/Pagination.vue'
 import PerPageDropdown from './UI/PerPageDropdown.vue'
@@ -126,20 +120,6 @@ const props = defineProps<{
     seoDescription: string
   }[]
 }>()
-
-const { data: RupProductsFromOrderData } = useFetch(
-  'http://localhost:8000/api/rup-products-from-order'
-).json()
-
-const orderCounts = computed(() => {
-  if (!RupProductsFromOrderData.value) return {}
-  return Object.fromEntries(
-    RupProductsFromOrderData.value.map((item: { productId: number; count: number }) => [
-      item.productId,
-      item.count,
-    ])
-  )
-})
 
 const emit = defineEmits<{
   (e: 'update:currentPage', page: number): void

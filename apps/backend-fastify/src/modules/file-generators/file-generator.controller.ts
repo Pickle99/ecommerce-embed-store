@@ -1,6 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { FileGeneratorService } from './file-generator.service'
 import { GenerateFileRequestType } from './types'
+import { OrdersService } from '../orders/orders.service'
 
 export class FileGeneratorController {
   async handleGenerateFile(request: FastifyRequest, reply: FastifyReply) {
@@ -12,8 +13,9 @@ export class FileGeneratorController {
 
     const storeId = process.env.ECWID_STORE_ID!
     const apiKey = process.env.ECWID_TOKEN!
+    const ordersService = new OrdersService(storeId, apiKey)
 
-    const service = new FileGeneratorService(storeId, apiKey)
+    const service = new FileGeneratorService(storeId, apiKey, ordersService)
 
     try {
       const allProducts = await service.fetchProducts()
@@ -27,8 +29,14 @@ export class FileGeneratorController {
         reply
           .header('Content-Disposition', 'attachment; filename=products.csv')
           .header('Content-Type', 'text/csv')
+        const counts = (await ordersService.getProductOrderCountsFromRupWidget()) || []
+        const countMap = Object.fromEntries(
+          counts
+            .filter((c) => typeof c.productId === 'number' && typeof c.count === 'number')
+            .map((c) => [c.productId, c.count])
+        )
 
-        service.streamCSV(filtered, reply.raw)
+        service.streamCSV(filtered, countMap, reply.raw)
       } else if (fileType === 'xlsx') {
         reply
           .header('Content-Disposition', 'attachment; filename=products.xlsx')
