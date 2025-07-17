@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-page cf" style="padding: 1.5rem; padding-bottom: 10rem">
+  <div class="settings-page cf" style="padding: 1.5rem; padding-bottom: 4rem">
     <div
       @click="handleRedirectToStore"
       style="display: flex; align-items: center; gap: 0.7rem; cursor: pointer; width: fit-content"
@@ -24,12 +24,10 @@
       <div class="named-area">
         <div class="named-area__header">
           <div class="named-area__titles">
-            <div class="named-area__title">Settings list</div>
+            <div class="named-area__title">Widget-related Settings</div>
             <div class="named-area__subtitle">
-              The list of custom or predefined settings showing their status. If you make this
-              section customizable, you need to hide it. Always place the Call to action list next
-              to the Settings list.
-              <a onclick="postOpenPage('#components.status-card')">See Status component</a>
+              You can enable/disable the widget from this section. Or set the default value of
+              visibility for users.
             </div>
           </div>
         </div>
@@ -50,8 +48,18 @@
           />
         </div>
       </div>
+      <div class="named-area">
+        <div class="named-area__header">
+          <div class="named-area__titles">
+            <div class="named-area__title">Products catalog list</div>
+            <div class="named-area__subtitle">You can see and export your products from here.</div>
+          </div>
+        </div>
+        <div class="named-area__body">
+          <ProductTableList :products="products" />
+        </div>
+      </div>
     </div>
-    <ProductTableList :products="products" />
   </div>
 </template>
 
