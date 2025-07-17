@@ -32,16 +32,16 @@
       <div v-else-if="error">{{ error.message }}</div>
       <div v-else-if="products.length === 0">No products found.</div>
       <div
-        v-else
-        class="list_products"
         :style="{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: '1rem',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '1.5rem',
+          padding: '1rem',
+          width: '100%',
+          boxSizing: 'border-box',
         }"
       >
-        <ProductItem v-for="item in products" :key="item.id" :product="item" />
+        <ProductItem :products="products" />
       </div>
     </div>
   </div>
