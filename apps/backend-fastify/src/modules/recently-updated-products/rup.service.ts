@@ -32,9 +32,9 @@ export class RupService {
     })
   }
 
-  async fetchProducts(storeId: string, apiKey: string) {
+  async fetchProducts(storeId: string, apiKey: string, additionalQueries?: string) {
     const res = await fetch(
-      `https://app.ecwid.com/api/v3/${storeId}/products?sortBy=UPDATED_TIME_DESC`,
+      `https://app.ecwid.com/api/v3/${storeId}/products${additionalQueries ?? ''}`,
       {
         method: 'GET',
         headers: {

@@ -58,8 +58,8 @@ export class RupController {
       if (!settings.recently_updated_products_visibility) {
         return reply.send({ products: [] })
       }
-
-      const products = await this.service.fetchProducts(storeId, apiKey)
+      const queries = `?sortBy=UPDATED_TIME_DESC&responseFields=items(id,name,defaultDisplayedPriceFormatted, imageUrl)`
+      const products = await this.service.fetchProducts(storeId, apiKey, queries)
 
       const limit = request.query.limit ? parseInt(request.query.limit, 10) : undefined
       if (limit !== undefined && (isNaN(limit) || limit <= 0)) {
@@ -86,8 +86,8 @@ export class RupController {
       if (!storeId || !apiKey) {
         return reply.code(500).send({ error: 'Missing Ecwid API credentials' })
       }
-
-      const products = await this.service.fetchProducts(storeId, apiKey)
+      const queries = `?sortBy=UPDATED_TIME_DESC&responseFields=items(id,name,description,defaultDisplayedPriceFormatted,smallThumbnailUrl,seoDescription)`
+      const products = await this.service.fetchProducts(storeId, apiKey, queries)
 
       return reply.send({
         products,
