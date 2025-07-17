@@ -1,27 +1,49 @@
 <template>
-  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem">
+  <div
+    style="
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    "
+  >
     <div
       class="toolbar"
       style="
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
-        gap: 0.5rem;
         align-items: center;
+        gap: 0.5rem;
         width: 100%;
       "
     >
-      <div>
-        <button type="button" class="btn btn-default btn-medium" @click="downloadSelected('csv')">
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem">
+        <button
+          type="button"
+          class="btn btn-default btn-medium"
+          style="min-width: 12rem"
+          @click="downloadSelected('csv')"
+        >
           Export Selected products (CSV)
         </button>
-        <button type="button" class="btn btn-default btn-medium" @click="downloadSelected('xlsx')">
+        <button
+          type="button"
+          class="btn btn-default btn-medium"
+          style="min-width: 12rem"
+          @click="downloadSelected('xlsx')"
+        >
           Export Selected products (XLSX)
         </button>
       </div>
 
-      <PerPageDropdown />
+      <div style="min-width: 200px">
+        <PerPageDropdown />
+      </div>
     </div>
   </div>
+
   <div v-if="products.length > 0">
     <div class="filtered-list__items long-list">
       <div
