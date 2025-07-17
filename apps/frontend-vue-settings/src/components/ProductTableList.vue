@@ -1,60 +1,81 @@
 <template>
-  <div class="toolbar">
-    <button type="button" class="btn btn-default btn-medium" @click="downloadSelected('csv')">
-      Export Selected products (CSV)
-    </button>
-    <button type="button" class="btn btn-default btn-medium" @click="downloadSelected('xlsx')">
-      Export Selected products (XLSX)
-    </button>
-  </div>
-
-  <div v-if="products.length > 0" class="filtered-list__items long-list">
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem">
     <div
-      v-for="item in products"
-      :key="item.id"
-      class="list-element list-element--compact list-element--has-hover"
+      class="toolbar"
+      style="
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        align-items: center;
+        width: 100%;
+      "
     >
-      <div class="list-element__toggle">
-        <input
-          type="checkbox"
-          :value="item.id"
-          v-model="selectedItems"
-          :id="item.id.toString()"
-          tabindex="0"
-          class="list-element__toggle-checkbox"
-        />
-        <label
-          :for="item.id.toString()"
-          class="list-element__toggle-label"
-          style="cursor: pointer"
-        ></label>
+      <div>
+        <button type="button" class="btn btn-default btn-medium" @click="downloadSelected('csv')">
+          Export Selected products (CSV)
+        </button>
+        <button type="button" class="btn btn-default btn-medium" @click="downloadSelected('xlsx')">
+          Export Selected products (XLSX)
+        </button>
       </div>
-      <div class="list-element__image">
-        <img :src="item.smallThumbnailUrl" />
-      </div>
-      <div class="list-element__content">
-        <div class="list-element__info">
-          <div class="list-element__header">
-            <div class="list-element__main-info">
-              <div class="list-element__title">
-                <span>{{ item.name }}</span>
-              </div>
-              <div class="list-element__description">
-                <span v-if="orderCounts[item.id]" class="muted"
-                  >Added to cart and ordered - {{ orderCounts[item.id] || 0 }} times
-                </span>
+
+      <PerPageDropdown />
+    </div>
+  </div>
+  <div v-if="products.length > 0">
+    <div class="filtered-list__items long-list">
+      <div
+        v-for="item in products"
+        :key="item.id"
+        class="list-element list-element--compact list-element--has-hover"
+      >
+        <div class="list-element__toggle">
+          <input
+            type="checkbox"
+            :value="item.id"
+            v-model="selectedItems"
+            :id="item.id.toString()"
+            tabindex="0"
+            class="list-element__toggle-checkbox"
+          />
+          <label
+            :for="item.id.toString()"
+            class="list-element__toggle-label"
+            style="cursor: pointer"
+          ></label>
+        </div>
+        <div class="list-element__image">
+          <img :src="item.smallThumbnailUrl" />
+        </div>
+        <div class="list-element__content">
+          <div class="list-element__info">
+            <div class="list-element__header">
+              <div class="list-element__main-info">
+                <div class="list-element__title">
+                  <span>{{ item.name }}</span>
+                </div>
+                <div class="list-element__description">
+                  <span v-if="orderCounts[item.id]" class="muted"
+                    >Added to cart and ordered - {{ orderCounts[item.id] || 0 }} times
+                  </span>
+                </div>
               </div>
             </div>
+            <div class="list-element__data-row">
+              {{ getFirstSentence(item.seoDescription) }}
+            </div>
           </div>
-          <div class="list-element__data-row">
-            {{ getFirstSentence(item.seoDescription) }}
+          <div class="list-element__actions">
+            <div class="list-element__price">{{ item.defaultDisplayedPriceFormatted }}</div>
           </div>
-        </div>
-        <div class="list-element__actions">
-          <div class="list-element__price">{{ item.defaultDisplayedPriceFormatted }}</div>
         </div>
       </div>
     </div>
+    <Pagination
+      :total-items="totalProductsWithoutPagination"
+      :current-page="props.currentPage"
+      @update:currentPage="updatePage"
+    />
   </div>
 
   <div v-else-if="products.length < 1" class="filtered-list__items long-list">
@@ -68,8 +89,12 @@
 import { useFetch } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import { getFirstSentence } from '../helpers'
+import Pagination from './UI/Pagination.vue'
+import PerPageDropdown from './UI/PerPageDropdown.vue'
 
 const props = defineProps<{
+  totalProductsWithoutPagination: number
+  currentPage: number
   products: {
     id: number
     name: string
@@ -93,6 +118,14 @@ const orderCounts = computed(() => {
     ])
   )
 })
+
+const emit = defineEmits<{
+  (e: 'update:currentPage', page: number): void
+}>()
+
+function updatePage(page: number) {
+  emit('update:currentPage', page)
+}
 
 const selectedItems = ref<number[]>([])
 

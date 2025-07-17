@@ -56,7 +56,11 @@
           </div>
         </div>
         <div class="named-area__body" v-if="products.length">
-          <ProductTableList :products="products" />
+          <ProductTableList
+            :products
+            :totalProductsWithoutPagination
+            v-model:currentPage="currentPage"
+          />
         </div>
       </div>
     </div>
@@ -65,10 +69,14 @@
 
 <script setup lang="ts">
 import { useFetch } from '@vueuse/core'
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import SettingButton from './SettingButton.vue'
 import ProductTableList from './ProductTableList.vue'
 import LongArrowLeftIcon from '../icons/LongArrowLeftIcon.vue'
+import { usePerPage } from '../composables/usePerPage'
+
+const { perPage } = usePerPage()
+const currentPage = ref(1)
 
 function handleRedirectToStore() {
   window.location.replace('http://localhost:8000')
@@ -76,9 +84,22 @@ function handleRedirectToStore() {
 
 const { data: rupSettingsData } = useFetch('http://localhost:8000/api/rup-settings').json()
 
-const { data: productsData } = useFetch('http://localhost:8000/api/products').json()
+const { data: productsData, execute: refetchProducts } = useFetch(
+  () => `http://localhost:8000/api/products?perPage=${perPage.value}&page=${currentPage.value}`
+).json()
 
-const products = computed(() => productsData.value?.products ?? [])
+const products = computed(() => productsData.value?.items ?? [])
+
+const totalProductsWithoutPagination = computed(() => productsData.value?.total ?? [])
+
+watch([currentPage], () => {
+  refetchProducts()
+})
+
+watch(perPage, () => {
+  currentPage.value = 1
+  refetchProducts()
+})
 
 const settings = computed(() => rupSettingsData.value?.settings ?? [])
 

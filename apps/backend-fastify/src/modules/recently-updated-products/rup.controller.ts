@@ -58,9 +58,8 @@ export class RupController {
       if (!settings.recently_updated_products_visibility) {
         return reply.send({ products: [] })
       }
-      const queries = `?sortBy=UPDATED_TIME_DESC&responseFields=items(id,name,defaultDisplayedPriceFormatted, imageUrl)`
+      const queries = `?sortBy=UPDATED_TIME_DESC&responseFields=items(id,name,defaultDisplayedPriceFormatted,imageUrl)`
       const products = await this.service.fetchProducts(storeId, apiKey, queries)
-
       const limit = request.query.limit ? parseInt(request.query.limit, 10) : undefined
       if (limit !== undefined && (isNaN(limit) || limit <= 0)) {
         return reply.code(400).send({ error: 'Invalid limit value' })
@@ -68,8 +67,9 @@ export class RupController {
 
       const count = limit ?? settings.recently_updated_products_visibility_count ?? 3
 
+      const limitedProducts = products.items.slice(0, count)
       return reply.send({
-        products: products.slice(0, count),
+        products: limitedProducts,
         defaultLimit: settings.recently_updated_products_visibility_count ?? 3,
       })
     } catch (err) {
@@ -78,7 +78,7 @@ export class RupController {
     }
   }
 
-  async getProducts(_: FastifyRequest, reply: FastifyReply) {
+  async getProducts(request: FastifyRequest, reply: FastifyReply) {
     try {
       const storeId = process.env.ECWID_STORE_ID
       const apiKey = process.env.ECWID_TOKEN
@@ -86,11 +86,20 @@ export class RupController {
       if (!storeId || !apiKey) {
         return reply.code(500).send({ error: 'Missing Ecwid API credentials' })
       }
-      const queries = `?sortBy=UPDATED_TIME_DESC&responseFields=items(id,name,description,defaultDisplayedPriceFormatted,smallThumbnailUrl,seoDescription)`
-      const products = await this.service.fetchProducts(storeId, apiKey, queries)
+
+      const query = request.query as { page?: string; perPage?: string }
+
+      const perPage = parseInt(query.perPage || '10', 10)
+      const page = parseInt(query.page || '1', 10)
+      const offset = (page - 1) * perPage
+
+      const queries = `?limit=${perPage}&offset=${offset}&sortBy=UPDATED_TIME_DESC&responseFields=total,items(id,name,description,defaultDisplayedPriceFormatted,smallThumbnailUrl,seoDescription)`
+
+      const ecwidData = await this.service.fetchProducts(storeId, apiKey, queries)
 
       return reply.send({
-        products,
+        items: ecwidData.items || [],
+        total: ecwidData.total || 0,
       })
     } catch (err) {
       console.error('Error fetching products:', err)

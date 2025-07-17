@@ -50,6 +50,6 @@ export class RupService {
     }
 
     const data = await res.json()
-    return data.items || []
+    return data || []
   }
 }
