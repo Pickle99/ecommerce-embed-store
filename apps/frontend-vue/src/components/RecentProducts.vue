@@ -3,7 +3,8 @@
     <div class="advised_products">
       <h2 style="text-align: center">Recently Updated Products</h2>
       <div class="form-area" style="display: flex; justify-content: flex-end; margin: 1rem 0">
-        <div class="form-area__content">
+        <div class="form-area__content" style="display: flex; align-items: center; gap: 1rem">
+          <p>Visibility of Recently Updated Products for you:</p>
           <div class="fieldsets-batch fieldsets-batch--with-single-field">
             <div style="width: 4rem" class="fieldset fieldset--select fieldset--no-label">
               <div>
