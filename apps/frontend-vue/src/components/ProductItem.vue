@@ -14,16 +14,15 @@
       :key="product.id"
       @mouseenter="hoveredId = product.id"
       @mouseleave="hoveredId = null"
-      @click="openProductPage(product.id)"
       :style="{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         fontFamily: 'Arial, sans-serif',
-        cursor: 'pointer',
       }"
     >
       <div
+        @click="openProductPage(product.id)"
         :style="{
           width: products.length === 1 ? '35%' : '100%',
           position: 'relative',
@@ -33,6 +32,7 @@
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: 'transparent',
+          cursor: 'pointer',
         }"
       >
         <img
@@ -53,6 +53,7 @@
       </div>
 
       <div
+        @click="openProductPage(product.id)"
         :style="{
           textAlign: 'center',
           marginTop: '0.75rem',
