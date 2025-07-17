@@ -163,10 +163,52 @@ Possible questions and answers:
 
 9. Why do i use nginx ?
 
-   **Answer: I had to use nginx, so we can download csv or xlsx files when we are not on devServer (streaming)** 
+   **Answer: I had to use nginx, so we can download csv or xlsx files when we are not on devServer (streaming)**
 
 ## Note
 
 All of the files were created manually by hand, there was no Vue-Cli or fastify-cli or whatever
 
 Started from package.json and ts.config, ended with vite configs and components and etc.
+
+## Changelog 18.07.2025 (00:38 +-)
+
+1. Change the style of products inside RUP -> now it looks like products grid on catalog
+
+2. Extra fields where unable to delete, when we were deleting the product from cart (in localStorage) -> Now they will
+
+3. Add missing parameter inside orderExtraFields -> orderDetailsDisplaySection: 'order_comments', so now we must see the order extra fields on admin side (however i am unable to get to this page, so i dont know will we see it or not, made it blindly)
+
+4. Now if we will turn off RUP widget from settings, it will disappear completely
+
+5. Added explanational text to RUP dropdown (query limiter)
+
+6. Added more explanational texts inside Settings page, removed the placeholder, placeholder replaced to some text.
+
+7. Added landing-like view on category page (landing?)
+
+8. Fixed All products block on Settings page, now its width will be the same as we have for widget settings
+
+9. Added pagination for Products
+
+10. Added more control (perPage) for pagination on Settings
+
+11. Added cursor pointers for checkboxes, and some other stuff i fastly found, or which was described
+
+12. Now we will redirect to exact product page (from RUP widget) - only if we will click on Image or Product name
+
+13. Removed the text _Added to cart and ordered_ from table (settings page), instead of that, i moved it to CSV and XLSX files (the name is kinda big, didnt knew how to name it, it just counts how much times we actually ordered the item via the help of RUP)
+
+14. Split the Ecwid logic from main.ts by parts
+
+15. Move SVG icons to the components (missing ones)
+
+16. Added new Shared folder, where i moved icon which were used on frontend-vue and frontend-vue-settings (tbh i dont know how much of neccessarity it have, but i just wanted to try)
+
+17. Added the case for ProductTableList if the products length 0
+
+18. Changed the From-Code sort, to sort which Ecwid rest api already have built-in
+
+19. Now we will get only necessary data from Rest Api (select the fields from query, instead of using unneccessary data)
+
+20. added domWaiter to wait for Ecwid to fully load, and only after that apply the settings button in footer, and widget, because in some workarounds we were unable to see settings page redirect button
