@@ -6,10 +6,8 @@
         <div :style="textBoxStyle">
           <h1 :style="headingStyle">E-commerce Ecwid Store</h1>
           <p :style="paragraphStyle">
-            This is your website. Here, you have everything to tell your brand's story. Add as many
-            pages as necessary, or use just one. Every section is fully customizable. Change images,
-            colors, and text to suit your needs effortlessly. <br />
-            <b>P.S i don't know what to write here, however you can click on Shop now.</b>
+            E-commerce store. On our page you can buy a lot of stuff. T-Shirts, shoes, and not only.
+            Please notice that right now it is just a samples, for test.
           </p>
           <a href="#" :style="buttonStyle" @click.prevent="scrollToProducts">Shop Now</a>
         </div>
@@ -42,6 +40,8 @@ const scrollToProducts = () => {
     productsAnchor.value.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 }
+
+// CSS Styles section below
 
 const fixedBlockHeight = '50vh'
 

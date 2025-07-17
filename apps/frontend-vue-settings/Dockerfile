@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY ../../package.json ../../yarn.lock ./
 COPY ../../apps/frontend-vue-settings ./apps/frontend-vue-settings
+COPY ../../apps/shared ./apps/shared
 
 RUN corepack enable && yarn install
 

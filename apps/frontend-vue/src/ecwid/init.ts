@@ -9,7 +9,7 @@ export function initCartEnhancements() {
   })
 }
 
-export function initEcwid() {
+export async function initEcwid() {
   //@ts-ignore
   if (typeof xProductBrowser === 'function') {
     //@ts-ignore

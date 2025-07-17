@@ -13,6 +13,7 @@ COPY ../../package.json ../../yarn.lock ./
 COPY ../../.yarn ./.yarn
 COPY ../../.yarnrc.yml ./
 
+
 # Copy the entire monorepo (workspace-aware)
 COPY ../../apps ./apps
 
